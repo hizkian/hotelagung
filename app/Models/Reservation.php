@@ -10,6 +10,10 @@ class Reservation extends Model
       'customer_id', 'checkin', 'checkout', 'dp', 'total', 'user_id',
   ];
 
+  public function invoice(){
+    return $this->hasOne('App\Models\Invoice');
+  }
+
   public function customer(){
     return $this->belongsTo('App\Models\Customer');
   }

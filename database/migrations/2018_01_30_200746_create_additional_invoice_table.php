@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvoiceAdditionalTable extends Migration
+class CreateAdditionalInvoiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateInvoiceAdditionalTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_additional', function (Blueprint $table) {
+        Schema::create('additional_invoice', function (Blueprint $table) {
             $table->integer('invoice_id')->unsigned()->nullable();
             $table->integer('additional_id')->unsigned()->nullable();
 

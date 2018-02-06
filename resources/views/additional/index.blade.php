@@ -58,7 +58,47 @@
 
                   <div class="panel-footer">
                     <a class="btn btn-warning" href="/additional/edit/{{$additional->id}}">Edit</a>
-                    <a class="btn btn-danger" href="/additional/delete/{{$additional->id}}">Delete</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$additional->id}}">
+                      Delete
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal{{$additional->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-sm animated shake" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="mySmallModalLabel">Warning</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Are you sure to delete this additional?
+
+                              <table>
+                                <tbody>
+                                  <tr>
+                                    <td>Additional name </td>
+                                    <td>: {{$additional->name}}</li></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Additional price </td>
+                                    <td>: Rp. {{$additional->price}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                          </div>
+                          <div class="modal-footer">
+
+                            <form class="" action="/additional/delete/{{$additional->id}}" method="get">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                              <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
               </div>
             @endforeach

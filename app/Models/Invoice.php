@@ -11,7 +11,7 @@ class Invoice extends Model
   ];
 
   public function reservation(){
-    return $this->hasOne('App\Models\Reservation');
+    return $this->belongsTo('App\Models\Reservation');
   }
 
   public function additionals()

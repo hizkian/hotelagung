@@ -76,7 +76,7 @@
                   </div>
 
                   <div class="form-group">
-                    <label>Total : Rp. <span id="total">0</span>,-</label>
+                    <label>Total per night: Rp. <span id="total">0</span>,-</label>
                   </div>
 
                   <div class="form-group">

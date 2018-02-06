@@ -61,7 +61,7 @@
 
                   <li>Down Payment : Rp. {{$reservation->dp}},-</li>
 
-                  <li>Total room price: : Rp. {{$reservation->total}},-</li>
+                  <li>Total room price per night: Rp. {{$reservation->total}},-</li>
                 </ul>
 
                 <form class="" action="/reservation/checkout" method="post">

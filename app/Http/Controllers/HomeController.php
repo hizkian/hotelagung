@@ -49,8 +49,6 @@ class HomeController extends Controller
         return redirect()->back()->with('error', 'Room already registered!');
       }
 
-
-
       $room = new Room;
       $room->name = $req->name;
       $room->price = $req->price;
@@ -71,6 +69,19 @@ class HomeController extends Controller
       Room::where('id', $id)->delete();
       $message = 'Room ' . $room . ' successfully deleted!';
       return redirect()->back()->with('message', $message);
+    }
+
+    public function editRoom($id){
+      $room = Room::find($id);
+      return view('room.edit', compact('room'));
+    }
+
+    public function editRoomData(Request $req){
+      $room = Room::find($req->id);
+      $room->name = $req->name;
+      $room->price = $req->price;
+      $room->save();
+      return redirect('/room/')->with('message', 'Additional has been edited!');
     }
 
     //=========RESERVATION==========
@@ -109,25 +120,15 @@ class HomeController extends Controller
 
       $reservation = new Reservation;
       $reservation->customer_id = $customer->id;
-      $reservation->checkin = date("Y-m-d");
+      $reservation->checkin = date("Y-m-d",strtotime("-3 days"));
       $reservation->total = 0;
       $reservation->dp = $req->dp;
 
       $reservation->user_id = Auth::id();
       $reservation->save();
-      dd($req->room);
 
-      foreach ($req->rooms as $room) {
+      foreach ($req->room as $room) {
         $room = Room::find($room);
-        $room->status = 1;
-        $room->save();
-        $reservation->rooms()->attach($room);
-        $reservation->total += $room->price;
-        $reservation->save();
-      }
-
-      for ($i=0; $i < count($req->room); $i++) {
-        $room = Room::find($req->room[$i]);
         $room->status = 1;
         $room->save();
         $reservation->rooms()->attach($room);
@@ -147,8 +148,26 @@ class HomeController extends Controller
 
     public function checkoutReservationData(Request $req)
     {
+      // dd($reports = Report::where('month', date('m'))->where('year', date('Y'))->first());
+      $report = Report::where('month', date('m'))->where('year', date('Y'))->first();
+      // dd($report === null);
+      if ($report == null) {
+        $report = new Report;
+        $report->month = date('m');
+        $report->year = date('Y');
+        $report->save();
+      }
+
       $reservation = Reservation::find($req->reservation_id);
       $reservation->checkout = date('Y-m-d');
+      $datediff = date_diff(date_create($reservation->checkin), date_create($reservation->checkout));
+      $days = (int)$datediff->format("%a");
+      if ($days == 0) {
+        $days = 1;
+      }
+      // dd($datediff->format("%a"));
+      $reservation->total *= $days;
+      // dd($reservation->total);
       $reservation->save();
 
       $invoice = new Invoice;
@@ -159,7 +178,11 @@ class HomeController extends Controller
         $total += $additional->price * $req->quantities[$i];
       }
       $invoice->total = $total;
+      $invoice->report_id = $report->id;
       $invoice->save();
+
+      $report->total += $invoice->total;
+      $report->save();
 
       // dd($req->quantities);
 
@@ -175,7 +198,9 @@ class HomeController extends Controller
         $room->save();
       }
 
-      return redirect('/reservation')->with('message', 'Checkout Success!');
+
+
+      return redirect('/reservation/')->with('message', 'Checkout Success!');
     }
 
     //==========CUSTOMER==========//
@@ -201,6 +226,21 @@ class HomeController extends Controller
       Customer::where('id', $id)->delete();
       $message = 'Customer ' . $customer . ' successfully deleted!';
       return redirect()->back()->with('message', $message);
+    }
+
+    public function editCustomer($id){
+      $customer = Customer::find($id);
+      return view('customer.edit', compact('customer'));
+    }
+
+    public function editCustomerData(Request $req){
+      $customer = Customer::find($req->id);
+      $customer->name = $req->name;
+      $customer->no_ktp = $req->no_ktp;
+      $customer->no_hp = $req->no_hp;
+      $customer->address = $req->address;
+      $customer->save();
+      return redirect('/customer/')->with('message', 'Customer has been edited!');
     }
 
     //==========ADDITIONAL==========//
@@ -234,6 +274,48 @@ class HomeController extends Controller
       $additional->price = $req->price;
       $additional->save();
 
-      return redirect()->back()->with('message', 'Additional successfully added!');
+      return redirect('/additional/')>with('message', 'Additional successfully added!');
+    }
+
+    public function deleteAdditional($id){
+      $additional = Additional::find($id)->name;
+      Additional::find($id)->delete();
+      $message = "Additional " . $additional . " has been deleted!";
+      return redirect()->back()->with('message', $message);
+    }
+
+    public function editAdditional($id){
+      $additional = Additional::find($id);
+      return view('additional.edit', compact('additional'));
+    }
+
+    public function editAdditionalData(Request $req){
+      $additional = Additional::find($req->id);
+      $additional->name = $req->name;
+      $additional->price = $req->price;
+      $additional->save();
+      return redirect('/additional/')->with('message', 'Additional has been edited!');
+    }
+
+    //==========INVOICE==========//
+
+    public function indexInvoice()
+    {
+      $invoices = Invoice::orderBy('created_at', 'DESC')->get();
+      return view('invoice.index', compact('invoices'));
+    }
+
+    public function printInvoice($id)
+    {
+      $invoice = Invoice::find($id);
+      return view('invoice.pdf', compact('invoice'));
+    }
+
+    //==========REPORT==========//
+
+    public function indexReport()
+    {
+      $reports = Report::orderBy('created_at', 'DESC')->get();
+      return view('report.index', compact('reports'));
     }
 }
