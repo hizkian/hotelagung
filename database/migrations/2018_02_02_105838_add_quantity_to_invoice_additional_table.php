@@ -13,7 +13,7 @@ class AddQuantityToInvoiceAdditionalTable extends Migration
      */
      public function up()
      {
-       Schema::table('invoice_additional', function($table)
+       Schema::table('additional_invoice', function($table)
        {
            $table->integer('quantity');
        });
@@ -21,7 +21,7 @@ class AddQuantityToInvoiceAdditionalTable extends Migration
 
      public function down()
      {
-       Schema::table('invoice_additional', function($table)
+       Schema::table('additional_invoice', function($table)
        {
            $table->dropColumn('quantity');
        });

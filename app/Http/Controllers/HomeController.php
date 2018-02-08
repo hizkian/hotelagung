@@ -274,7 +274,7 @@ class HomeController extends Controller
       $additional->price = $req->price;
       $additional->save();
 
-      return redirect('/additional/')>with('message', 'Additional successfully added!');
+      return redirect('/additional/')->with('message', 'Additional successfully added!');
     }
 
     public function deleteAdditional($id){

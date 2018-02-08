@@ -17,7 +17,7 @@ class CreateReservationsTable extends Migration
             $table->increments('id');
             $table->integer('customer_id')->unsigned();
             $table->date('checkin');
-            $table->date('checkout')->default(null);
+            $table->date('checkout')->default(NULL);
             $table->integer('dp')->unsigned();
             $table->integer('total')->unsigned()->default(0);
             $table->integer('user_id')->unsigned();
