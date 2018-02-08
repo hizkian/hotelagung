@@ -10,6 +10,7 @@ use App\Models\Report;
 use App\Models\Reservation;
 use App\Models\Room;
 use App\Models\User;
+use PDF;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -200,7 +201,7 @@ class HomeController extends Controller
 
 
 
-      return redirect('/reservation/')->with('message', 'Checkout Success!');
+      return redirect('/invoice/')->with('message', 'Checkout Success!');
     }
 
     //==========CUSTOMER==========//
@@ -308,7 +309,9 @@ class HomeController extends Controller
     public function printInvoice($id)
     {
       $invoice = Invoice::find($id);
-      return view('invoice.pdf', compact('invoice'));
+      $pdf = PDF::loadView('invoice.pdf', ['invoice' => $invoice]);
+      return $pdf->stream('invoice.pdf');
+      // return view('invoice.pdf', compact('invoice'));
     }
 
     //==========REPORT==========//
