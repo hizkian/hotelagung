@@ -149,13 +149,24 @@ class HomeController extends Controller
 
     public function checkoutReservationData(Request $req)
     {
+      // dd($req);
       // dd($reports = Report::where('month', date('m'))->where('year', date('Y'))->first());
-      $report = Report::where('month', date('m'))->where('year', date('Y'))->first();
-      // dd($report === null);
+      // dd(Report::where('month', (int)date('m'))->where('year', (int)date('Y'))->first());
+      $report = Report::where('month', (int)date('m'))->where('year', (int)date('Y'))->first();
+      dd($report);
       if ($report == null) {
         $report = new Report;
         $report->month = date('m');
         $report->year = date('Y');
+        if ((int)date('m') == 1) {
+          $lastdate = Report::where('month', 12)->where('year', (int)date('Y') - 1)->first();
+        } else {
+          $lastdate = Report::where('month', (int)date('m') - 1)->where('year', (int)date('Y'))->first();
+        }
+        if ($lastdate != null) {
+          $report->total = $lastdate->total;
+        }
+
         $report->save();
       }
 
@@ -191,7 +202,7 @@ class HomeController extends Controller
         $additional = Additional::find($req->additionals[$i]);
         // $invoice->additionals()->save($additional, ['quantity' => $req->quantites[$i]]);
         $invoice->additionals()->attach(
-          [$req->additionals[$i] => ['quantity' => '2']]
+          [$req->additionals[$i] => ['quantity' => $req->quantities[$i]]]
         );
       }
       foreach ($reservation->rooms as $room) {
@@ -325,7 +336,15 @@ class HomeController extends Controller
     public function printReport($id)
     {
       $report = Report::find($id);
-      $pdf = PDF::loadView('report.pdf', ['report' => $report]);
+      $roomtotal = 0;
+      $additionaltotal = 0;
+      foreach ($report->invoices as $invoice) {
+        $roomtotal += $invoice->total;
+        foreach ($invoice->additionals as $additional) {
+          $additionaltotal += $additional->price * $additional->pivot->quantity;
+        }
+      }
+      $pdf = PDF::loadView('report.pdf', ['report' => $report, 'additionaltotal' => $additionaltotal, 'roomtotal' => $roomtotal]);
       return $pdf->stream('report.pdf');
       // return view('invoice.pdf', compact('invoice'));
     }

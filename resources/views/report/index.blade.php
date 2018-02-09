@@ -50,7 +50,8 @@
               <div class="panel panel-default">
                   <div class="panel-heading">
                     {{-- {{dd(date('F', strtotime($report->month)))}} --}}
-                    {{date('F', strtotime($report->month)) . " " . $report->year}}
+                    {{-- {{date('F', 3)}} --}}
+                    {{date('F', strtotime($report->created_at)) . " " . $report->year}}
                     <span class="pull-right">Rp. {{$report->total}}</span>
                   </div>
 

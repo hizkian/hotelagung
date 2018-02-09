@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('report')->group(function () {
         Route::get('/', 'HomeController@indexReport');
+        Route::get('/print/{id}', 'HomeController@printReport');
     });
 });
 
