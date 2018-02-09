@@ -121,7 +121,7 @@ class HomeController extends Controller
 
       $reservation = new Reservation;
       $reservation->customer_id = $customer->id;
-      $reservation->checkin = date("Y-m-d",strtotime("-3 days"));
+      $reservation->checkin = date("Y-m-d");
       $reservation->total = 0;
       $reservation->dp = $req->dp;
 
@@ -320,5 +320,13 @@ class HomeController extends Controller
     {
       $reports = Report::orderBy('created_at', 'DESC')->get();
       return view('report.index', compact('reports'));
+    }
+
+    public function printReport($id)
+    {
+      $report = Report::find($id);
+      $pdf = PDF::loadView('report.pdf', ['report' => $report]);
+      return $pdf->stream('report.pdf');
+      // return view('invoice.pdf', compact('invoice'));
     }
 }

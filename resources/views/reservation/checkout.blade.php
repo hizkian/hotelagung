@@ -92,7 +92,11 @@
                   </div>
 
                   <div class="form-group">
-                    <label>Total invoice: Rp. <span id="totalinvoice">{{$reservation->total * (int)date_diff(date_create($reservation->checkin), date_create(date('Y-m-d')))->format("%a")}}</span>,-</label>
+                    <label>Total invoice: Rp. <span id="totalinvoice">@if ((int)date_diff(date_create($reservation->checkin), date_create(date('Y-m-d')))->format("%a") == 0)
+                      {{$reservation->total}}
+                    @else
+                      {{$reservation->total * (int)date_diff(date_create($reservation->checkin), date_create(date('Y-m-d')))->format("%a")}}
+                    @endif</span>,-</label>
                   </div>
 
                   {{csrf_field()}}
