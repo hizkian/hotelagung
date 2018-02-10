@@ -50,19 +50,19 @@
 
     <table>
         {{-- table head laporan --}}
-        <tr>
-          <th>No</th>
-          <th>Nomor Invoice</th>
-          <th>Subtotal</th>
+        <tr class="w3-light-gray tengah">
+          <th style="width:25px">No</th>
+          <th class="tengah">Nomor Invoice</th>
+          <th class="tengah" style="width:200px">Subtotal</th>
         </tr>
 
         {{-- Table Content --}}
         {{$count = 1}}
         @foreach ($report->invoices as $invoice)
           <tr>
-            <td>{{$count}}</td>
+            <td class="tengah">{{$count}}</td>
             <td>ha/res/0{{$invoice->id}}</td>
-            <td>Rp. {{number_format($invoice->total, 0, '', '.')}},-</td>
+            <td class="kanan"> {{number_format($invoice->total, 0, '', ',')}}</td>
           </tr>
           {{$count++}}
         @endforeach
@@ -75,65 +75,101 @@
         <tr>
           <td style="border:0px"></td>
           <th class="kanan">Total</th>
-          <td>Rp. {{number_format($report->total, 0, '', '.')}},-</td>
+          <td class="kanan"> {{number_format($report->total, 0, '', ',')}}</td>
         </tr>
     </table>
 
     <div class="page-break"></div>
     {{-- Table Detail rooms & Additionals --}}
+    <div class="w3-display-container">
+      <h1 class="w3-left">Hotel Agung</h1>
+      <h3 class="w3-text-grey w3-right">Additionals and Rooms Total</h3>
+    </div>
+
+    <div class="w3-container">
+     {{-- {{print_r($harga->where('kamar', 'Anggrek 2')[1]['harga'])}} --}}
+      <ul style="list-style:none;margin-left:-40px">
+        <li>Jl. Diponegoro No.9, Genteng Kulon,</li>
+        <li>Genteng, Kabupaten Banyuwangi, Jawa Timur 68465</li>
+        <li>(0333) 845844</li>
+      </ul>
+    </div>
+    <hr>
+    <ul style="list-style:none;margin-left:-40px">
+      <li style="font-weight:bold">Bulan : {{date('F Y', strtotime($report->created_at))}}</li>
+      <li></li>
+    </ul>
     <table>
       {{-- Table Head --}}
-      <tr>
-        <th>No</th>
+      <tr class="w3-light-gray tengah">
+        <th style="width:25px">No</th>
         <th>Nama</th>
-        <th>Subtotal</th>
+        <th style="width:200px">Subtotal</th>
       </tr>
       {{-- End of table head --}}
 
       {{-- Table Content --}}
       <tr>
-        <td>1</td>
+        <td class="tengah">1</td>
         <td>Rooms</td>
-        <td>Rp. {{number_format($roomtotal, 0, '', '.')}},-</td>
+        <td class="kanan"> {{number_format($roomtotal, 0, '', ',')}}</td>
       </tr>
       <tr>
-        <td>2</td>
+        <td class="tengah">2</td>
         <td>Additional</td>
-        <td>Rp. {{number_format($additionaltotal, 0, '', '.')}},-</td>
+        <td class="kanan"> {{number_format($additionaltotal, 0, '', ',')}}</td>
       </tr>
 
       {{-- Table Footer --}}
       <tr>
         <td></td>
         <th class="kanan">Total</th>
-        <td>Rp. {{number_format($roomtotal + $additionaltotal, 0, '', '.')}},-</td>
+        <td class="kanan"> {{number_format($roomtotal + $additionaltotal, 0, '', ',')}}</td>
       </tr>
     </table>
 
     <div class="page-break"></div>
     {{-- Table Additonal details --}}
+    <div class="w3-display-container">
+      <h1 class="w3-left">Hotel Agung</h1>
+      <h3 class="w3-text-grey w3-right">Additionals Detail</h3>
+    </div>
+
+    <div class="w3-container">
+     {{-- {{print_r($harga->where('kamar', 'Anggrek 2')[1]['harga'])}} --}}
+      <ul style="list-style:none;margin-left:-40px">
+        <li>Jl. Diponegoro No.9, Genteng Kulon,</li>
+        <li>Genteng, Kabupaten Banyuwangi, Jawa Timur 68465</li>
+        <li>(0333) 845844</li>
+      </ul>
+    </div>
+    <hr>
+    <ul style="list-style:none;margin-left:-40px">
+      <li style="font-weight:bold">Bulan : {{date('F Y', strtotime($report->created_at))}}</li>
+      <li></li>
+    </ul>
     <table>
-      <tr>
-        <th>No</th>
+      <tr class="w3-light-gray tengah">
+        <th style="width:25px">No</th>
         <th>Nomor Invoice</th>
         <th>Nama Customer</th>
         <th>Nama Barang</th>
         <th>Harga Satuan</th>
         <th>Quantity</th>
-        <th>Subtotal</th>
+        <th style="width:200px">Subtotal</th>
       </tr>
       {{-- Table Content --}}
       {{$count = 1}}
       @foreach ($report->invoices as $invoice)
         @foreach ($invoice->additionals as $additional)
           <tr>
-            <td>{{$count}}</td>
+            <td class="tengah">{{$count}}</td>
             <td>ha/res/0{{$invoice->id}}</td>
             <td>{{$invoice->reservation->customer->name}}</td>
             <td>{{$additional->name}}</td>
-            <td>Rp. {{number_format($additional->price, 0, '', '.')}},-</td>
-            <td>{{$additional->pivot->quantity}}</td>
-            <td>Rp. {{number_format($additional->pivot->quantity * $additional->price, 0, '', '.')}},-</td>
+            <td class="kanan"> {{number_format($additional->price, 0, '', ',')}}</td>
+            <td class="tengah">{{$additional->pivot->quantity}}</td>
+            <td class="kanan"> {{number_format($additional->pivot->quantity * $additional->price, 0, '', ',')}}</td>
           </tr>
           {{$count++}}
         @endforeach
@@ -145,23 +181,40 @@
         <td></td>
         <td></td>
         <td></td>
-        <th>Total</th>
-        <td>Rp. {{number_format($additionaltotal, 0 , '', '.')}},-</td>
+        <th class="kanan">Total</th>
+        <td class="kanan"> {{number_format($additionaltotal, 0 , '', ',')}}</td>
       </tr>
 
     </table>
 
     <div class="page-break"></div>
+    <div class="w3-display-container">
+      <h1 class="w3-left">Hotel Agung</h1>
+      <h3 class="w3-text-grey w3-right">Rooms Detail</h3>
+    </div>
 
+    <div class="w3-container">
+     {{-- {{print_r($harga->where('kamar', 'Anggrek 2')[1]['harga'])}} --}}
+      <ul style="list-style:none;margin-left:-40px">
+        <li>Jl. Diponegoro No.9, Genteng Kulon,</li>
+        <li>Genteng, Kabupaten Banyuwangi, Jawa Timur 68465</li>
+        <li>(0333) 845844</li>
+      </ul>
+    </div>
+    <hr>
+    <ul style="list-style:none;margin-left:-40px">
+      <li style="font-weight:bold">Bulan : {{date('F Y', strtotime($report->created_at))}}</li>
+      <li></li>
+    </ul>
     <table>
-      <tr>
-        <th>No</th>
+      <tr class="w3-light-gray tengah">
+        <th style="width:25px">No</th>
         <th>Nomor Invoice</th>
         <th>Nama Customer</th>
         <th>Nama Kamar</th>
         <th>Harga Per Malam</th>
         <th>Jumlah Hari</th>
-        <th>Subtotal</th>
+        <th style="width:200px">Subtotal</th>
       </tr>
       {{-- Table Content --}}
       {{$count = 1}}
@@ -172,13 +225,13 @@
       @foreach ($report->invoices as $invoice)
         @foreach ($invoice->reservation->rooms as $room)
           <tr>
-            <td>{{$count}}</td>
+            <td class="tengah">{{$count}}</td>
             <td>ha/res/0{{$invoice->id}}</td>
             <td>{{$invoice->reservation->customer->name}}</td>
             <td>{{$room->name}}</td>
-            <td>Rp. {{number_format($room->price, 0, '', '.')}},-</td>
-            <td>{{$days}}</td>
-            <td>Rp. {{number_format($days * $room->price, 0, '', '.')}},-</td>
+            <td class="kanan"> {{number_format($room->price, 0, '', ',')}}</td>
+            <td class="tengah">{{$days}}</td>
+            <td class="kanan"> {{number_format($days * $room->price, 0, '', ',')}}</td>
           </tr>
           {{$count++}}
         @endforeach
@@ -190,8 +243,8 @@
         <td></td>
         <td></td>
         <td></td>
-        <th>Total</th>
-        <td>Rp. {{number_format($roomtotal, 0, '', '.')}},-</td>
+        <th class="kanan">Total</th>
+        <td class="kanan"> {{number_format($roomtotal, 0, '', ',')}}</td>
       </tr>
 
     </table>
