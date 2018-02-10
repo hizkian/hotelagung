@@ -40,6 +40,16 @@
             </div>
             <br>
 
+            @if (count($rooms) == 0)
+              <div class="alert alert-danger">
+                <span class="fa-stack fa-lg close-button">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-times fa-stack-1x fa-inverse"></i>
+                </span>
+                  No additionals registered!
+              </div>
+            @endif
+
             @foreach ($rooms as $room)
               <div class="panel panel-default">
                   <div class="panel-heading">

@@ -60,25 +60,21 @@
         {{-- table head kamar --}}
         <tr class="tengah w3-light-gray">
           <th class="kiri border-right" >Nama Kamar</th>
-          <th>Jumlah menginap</th>
-          <th>Harga</th>
+          <th>Jumlah Menginap</th>
+          <th>Harga per Malam</th>
           <th class="kanan">Total</th>
         </tr>
         {{-- End of table head kamar --}}
+        {{$days = (int)date_diff(date_create($invoice->reservation->checkin), date_create(date('Y-m-d')))->format("%a")}}
+        @if ($days == 0)
+          {{$days = 1}}
+        @endif
         @foreach ($invoice->reservation->rooms as $rooms)
         <tr>
           <td>{{$rooms->name}}</td>
-          <td class="tengah">@if ((int)date_diff(date_create($invoice->reservation->checkin), date_create(date('Y-m-d')))->format("%a") == 0)
-            {{1}}
-          @else
-            {{(int)date_diff(date_create($invoice->reservation->checkin), date_create(date('Y-m-d')))->format("%a")}}
-          @endif</td>
-          <td class="tengah">{{$rooms->price}}</td>
-          <td class="kanan">@if ((int)date_diff(date_create($invoice->reservation->checkin), date_create(date('Y-m-d')))->format("%a") == 0)
-            {{$rooms->price}}
-          @else
-            {{$rooms->price * (int)date_diff(date_create($invoice->reservation->checkin), date_create(date('Y-m-d')))->format("%a")}}
-          @endif</td>
+          <td class="tengah">{{$days}}</td>
+          <td class="kanan">Rp. {{number_format($rooms->price, 0, '', '.')}},-</td>
+          <td class="kanan">Rp. {{number_format($rooms->price * $days, 0, '', '.')}},-</td>
         </tr>
         @endforeach
 
@@ -87,7 +83,7 @@
         <tr class="tengah w3-light-gray">
           <th class="kiri">Nama Tambahan</th>
           <th>Jumlah</th>
-          <th>Harga</th>
+          <th>Harga Satuan</th>
           <th class="kanan">Subtotal</th>
         </tr>
         {{-- End of head --}}
@@ -95,27 +91,27 @@
         <tr>
           <td>{{$additionals->name}}</td>
           <td class="tengah">{{$additionals->pivot->quantity}}</td>
-          <td class="tengah">{{$additionals->price}}</td>
-          <td class="kanan">{{$additionals->pivot->quantity * $additionals->price}}</td>
+          <td class="kanan">Rp. {{number_format($additionals->price, 0, '', '.')}},-</td>
+          <td class="kanan">Rp. {{number_format($additionals->price * $additionals->pivot->quantity, 0, '', '.')}},-</td>
         </tr>
         @endforeach
         <tr>
           <td></td>
           <td></td>
-          <td class="tengah" style="font-weight:bold">Total</td>
-          <td class="kanan">Rp. {{$invoice->total}}</td>
+          <td class="kanan" style="font-weight:bold">Total</td>
+          <td class="kanan">Rp. {{number_format($invoice->total, 0, '', '.')}},-</td>
         </tr>
         <tr>
           <td></td>
           <td></td>
-          <td class="tengah" style="font-weight:bold">DP</td>
-          <td class="kanan">Rp. {{$invoice->reservation->dp}}</td>
+          <td class="kanan" style="font-weight:bold">DP</td>
+          <td class="kanan">Rp. {{number_format($invoice->reservation->dp, 0, '', '.')}},-</td>
         </tr>
         <tr>
           <td></td>
           <td></td>
-          <td class="tengah" style="font-weight:bold">Tagihan</td>
-          <td class="kanan w3-light-gray">Rp. {{$invoice->total - $invoice->reservation->dp}}</td>
+          <td class="kanan" style="font-weight:bold">Tagihan</td>
+          <td class="kanan w3-light-gray">Rp. {{number_format($invoice->total - $invoice->reservation->dp, 0, '', '.')}},-</td>
         </tr>
     </table>
   </body>

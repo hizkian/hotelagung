@@ -23,6 +23,9 @@
         border-collapse: collapse;
         width: 100%;
       }
+      .page-break {
+          page-break-after: always;
+      }
     </style>
   </head>
   <body>
@@ -48,7 +51,7 @@
     <table>
         {{-- table head laporan --}}
         <tr>
-          <th>Nomor</th>
+          <th>No</th>
           <th>Nomor Invoice</th>
           <th>Subtotal</th>
         </tr>
@@ -59,7 +62,7 @@
           <tr>
             <td>{{$count}}</td>
             <td>ha/res/0{{$invoice->id}}</td>
-            <td>Rp. {{$invoice->total}},-</td>
+            <td>Rp. {{number_format($invoice->total, 0, '', '.')}},-</td>
           </tr>
           {{$count++}}
         @endforeach
@@ -72,16 +75,16 @@
         <tr>
           <td style="border:0px"></td>
           <th class="kanan">Total</th>
-          <td>Rp. {{$report->total}},-</td>
+          <td>Rp. {{number_format($report->total, 0, '', '.')}},-</td>
         </tr>
     </table>
 
-    <br>
+    <div class="page-break"></div>
     {{-- Table Detail rooms & Additionals --}}
     <table>
       {{-- Table Head --}}
       <tr>
-        <th>Nomor</th>
+        <th>No</th>
         <th>Nama</th>
         <th>Subtotal</th>
       </tr>
@@ -91,47 +94,104 @@
       <tr>
         <td>1</td>
         <td>Rooms</td>
-        <td>Rp. {{$roomtotal}},-</td>
+        <td>Rp. {{number_format($roomtotal, 0, '', '.')}},-</td>
       </tr>
       <tr>
         <td>2</td>
         <td>Additional</td>
-        <td>Rp. {{$additionaltotal}},-</td>
+        <td>Rp. {{number_format($additionaltotal, 0, '', '.')}},-</td>
       </tr>
 
       {{-- Table Footer --}}
       <tr>
         <td></td>
-        <th>Total</th>
-        <td></td>
+        <th class="kanan">Total</th>
+        <td>Rp. {{number_format($roomtotal + $additionaltotal, 0, '', '.')}},-</td>
       </tr>
     </table>
 
-    <br>
+    <div class="page-break"></div>
     {{-- Table Additonal details --}}
     <table>
       <tr>
-        <th>Nomor </th>
+        <th>No</th>
         <th>Nomor Invoice</th>
+        <th>Nama Customer</th>
         <th>Nama Barang</th>
+        <th>Harga Satuan</th>
         <th>Quantity</th>
         <th>Subtotal</th>
       </tr>
       {{-- Table Content --}}
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
+      {{$count = 1}}
+      @foreach ($report->invoices as $invoice)
+        @foreach ($invoice->additionals as $additional)
+          <tr>
+            <td>{{$count}}</td>
+            <td>ha/res/0{{$invoice->id}}</td>
+            <td>{{$invoice->reservation->customer->name}}</td>
+            <td>{{$additional->name}}</td>
+            <td>Rp. {{number_format($additional->price, 0, '', '.')}},-</td>
+            <td>{{$additional->pivot->quantity}}</td>
+            <td>Rp. {{number_format($additional->pivot->quantity * $additional->price, 0, '', '.')}},-</td>
+          </tr>
+          {{$count++}}
+        @endforeach
+      @endforeach
       {{-- End of Table Content --}}
       <tr>
         <td></td>
         <td></td>
         <td></td>
-        <th>Total</th>
         <td></td>
+        <td></td>
+        <th>Total</th>
+        <td>Rp. {{number_format($additionaltotal, 0 , '', '.')}},-</td>
+      </tr>
+
+    </table>
+
+    <div class="page-break"></div>
+
+    <table>
+      <tr>
+        <th>No</th>
+        <th>Nomor Invoice</th>
+        <th>Nama Customer</th>
+        <th>Nama Kamar</th>
+        <th>Harga Per Malam</th>
+        <th>Jumlah Hari</th>
+        <th>Subtotal</th>
+      </tr>
+      {{-- Table Content --}}
+      {{$count = 1}}
+      {{$days = (int)date_diff(date_create($invoice->reservation->checkin), date_create(date('Y-m-d')))->format("%a")}}
+      @if ($days == 0)
+        {{$days = 1}}
+      @endif
+      @foreach ($report->invoices as $invoice)
+        @foreach ($invoice->reservation->rooms as $room)
+          <tr>
+            <td>{{$count}}</td>
+            <td>ha/res/0{{$invoice->id}}</td>
+            <td>{{$invoice->reservation->customer->name}}</td>
+            <td>{{$room->name}}</td>
+            <td>Rp. {{number_format($room->price, 0, '', '.')}},-</td>
+            <td>{{$days}}</td>
+            <td>Rp. {{number_format($days * $room->price, 0, '', '.')}},-</td>
+          </tr>
+          {{$count++}}
+        @endforeach
+      @endforeach
+      {{-- End of Table Content --}}
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <th>Total</th>
+        <td>Rp. {{number_format($roomtotal, 0, '', '.')}},-</td>
       </tr>
 
     </table>

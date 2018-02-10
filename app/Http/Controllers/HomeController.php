@@ -339,7 +339,7 @@ class HomeController extends Controller
       $roomtotal = 0;
       $additionaltotal = 0;
       foreach ($report->invoices as $invoice) {
-        $roomtotal += $invoice->total;
+        $roomtotal += $invoice->reservation->total;
         foreach ($invoice->additionals as $additional) {
           $additionaltotal += $additional->price * $additional->pivot->quantity;
         }
