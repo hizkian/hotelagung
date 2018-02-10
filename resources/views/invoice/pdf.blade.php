@@ -87,6 +87,18 @@
           <td class="tengah" style="font-weight:bold">Total</td>
           <td class="kanan">Rp. {{$invoice->total}}</td>
         </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td class="tengah" style="font-weight:bold">DP</td>
+          <td class="kanan">Rp. {{$invoice->reservation->dp}}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td class="tengah" style="font-weight:bold">Tagihan</td>
+          <td class="kanan">Rp. {{$invoice->total - $invoice->reservation->dp}}</td>
+        </tr>
     </table>
   </body>
 </html>
