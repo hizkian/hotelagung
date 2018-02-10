@@ -153,7 +153,7 @@ class HomeController extends Controller
       // dd($reports = Report::where('month', date('m'))->where('year', date('Y'))->first());
       // dd(Report::where('month', (int)date('m'))->where('year', (int)date('Y'))->first());
       $report = Report::where('month', (int)date('m'))->where('year', (int)date('Y'))->first();
-      dd($report);
+      // dd($report);
       if ($report == null) {
         $report = new Report;
         $report->month = date('m');
