@@ -39,15 +39,15 @@
               <div class="panel-heading">Edit Additional</div>
 
               <div class="panel-body">
-                <form class="" action="/additional/edit" method="post">
+                <form class="" action="/additional/edit" method="post" onsubmit="return checkForm(this);">
                   <input type="text" name="id" value="{{$additional->id}}" class="hidden">
                   <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control" value="{{$additional->name}}">
+                    <input type="text" name="name" class="form-control" value="{{$additional->name}}" required autofocus>
                   </div>
                   <div class="form-group">
                     <label for="price">Price</label>
-                    <input type="text" name="price" class="form-control" value="{{$additional->price}}">
+                    <input type="text" name="price" class="form-control" value="{{$additional->price}}" required>
                   </div>
                   {{csrf_field()}}
                   <button type="submit" name="submit">Submit</button>

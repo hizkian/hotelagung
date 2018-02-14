@@ -64,7 +64,7 @@
                   <li>Total room price per night: Rp. {{$reservation->total}},-</li>
                 </ul>
 
-                <form class="" action="/reservation/checkout" method="post">
+                <form class="" action="/reservation/checkout" method="post" onsubmit="return checkForm(this);">
                   <input type="text" name="reservation_id" value="{{$reservation->id}}" class="hidden">
                   <div class="form-group">
                     <label for="additional">Additional</label>
@@ -104,50 +104,6 @@
                     <button type="submit" name="submit" class="form-control btn btn-primary">Submit</button>
                   </div>
                 </form>
-                {{-- <form class="" action="/reservation/create" method="post">
-                  <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="no_ktp">KTP Number</label>
-                    <input type="text" name="no_ktp" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="no_hp">Phone Number</label>
-                    <input type="text" name="no_hp" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="dp">Down Payment</label>
-                    <input type="text" name="dp" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="address">Address</label>
-                    <textarea name="address" rows="3" cols="80" class="form-control"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="room">Choose Room</label>
-                    <select id="room" class="form-control"name="room">
-                      <option value="" disabled selected></option>
-                      @foreach ($rooms as $room)
-                        <option value="{{$room->id}}">{{ $room->name }}</option>
-                      @endforeach
-                    </select>
-
-                  </div>
-                  <div class="form-group">
-                    <button id="add" type="button" name="button" class="form-control btn btn-default pull-right">Add Room</button>
-                  </div>
-
-                  <div id="container" class="form-group">
-                    <label>Added Room</label>
-                  </div>
-
-                  {{csrf_field()}}
-                  <div class="form-group">
-                    <button type="submit" name="submit" class="form-control btn btn-primary pull-right">Submit</button>
-                  </div>
-                </form> --}}
               </div>
             </div>
           </div>

@@ -39,23 +39,23 @@
               <div class="panel-heading">New Reservation</div>
 
               <div class="panel-body">
-                <form class="" action="/reservation/create" method="post">
+                <form class="" action="/reservation/create" method="post" onsubmit="return checkForm(this);">
                   <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" required autofocus>
                   </div>
                   <div class="form-group">
                     <label for="no_ktp">KTP Number</label>
-                    <input type="text" name="no_ktp" class="form-control">
+                    <input type="text" name="no_ktp" class="form-control" required>
                   </div>
                   <div class="form-group">
                     <label for="no_hp">Phone Number</label>
-                    <input type="text" name="no_hp" class="form-control">
+                    <input type="text" name="no_hp" class="form-control" required>
                   </div>
 
                   <div class="form-group">
                     <label for="address">Address</label>
-                    <textarea name="address" rows="3" cols="80" class="form-control"></textarea>
+                    <textarea name="address" rows="3" cols="80" class="form-control" required></textarea>
                   </div>
                   <div class="form-group">
                     <label for="room">Choose Room</label>
@@ -81,7 +81,7 @@
 
                   <div class="form-group">
                     <label for="dp">Down Payment</label>
-                    <input type="text" name="dp" class="form-control">
+                    <input type="text" name="dp" class="form-control" required>
                   </div>
 
                   {{csrf_field()}}
@@ -96,6 +96,8 @@
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
+
+  
 
   $(document).ready(function(){
     var count = 0;

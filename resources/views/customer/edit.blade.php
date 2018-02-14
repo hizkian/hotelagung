@@ -40,23 +40,23 @@
               <div class="panel-heading">Edit Customer Data</div>
 
               <div class="panel-body">
-                <form class="" action="/customer/edit" method="post">
+                <form class="" action="/customer/edit" method="post" onsubmit="return checkForm(this);">
                   <input type="text" name="id" value="{{$customer->id}}" class="hidden">
                   <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control" value="{{$customer->name}}">
+                    <input type="text" name="name" class="form-control" value="{{$customer->name}}" required autofocus>
                   </div>
                   <div class="form-group">
                     <label for="price">KTP Number</label>
-                    <input type="text" name="no_ktp" class="form-control" value="{{$customer->no_ktp}}">
+                    <input type="text" name="no_ktp" class="form-control" value="{{$customer->no_ktp}}" required>
                   </div>
                   <div class="form-group">
                     <label for="price">Phone Number</label>
-                    <input type="text" name="no_hp" class="form-control" value="{{$customer->no_hp}}">
+                    <input type="text" name="no_hp" class="form-control" value="{{$customer->no_hp}}" required>
                   </div>
                   <div class="form-group">
                     <label for="price">Address</label>
-                    <input type="text" name="address" class="form-control" value="{{$customer->address}}">
+                    <input type="text" name="address" class="form-control" value="{{$customer->address}}" required>
                   </div>
                   {{csrf_field()}}
                   <button type="submit" name="submit">Submit</button>
