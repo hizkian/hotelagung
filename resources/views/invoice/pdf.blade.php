@@ -43,25 +43,27 @@
 
     <div class="w3-container">
      {{-- {{print_r($harga->where('kamar', 'Anggrek 2')[1]['harga'])}} --}}
-      <ul style="list-style:none;margin-left:-40px">
+      <ul style="list-style:none;margin-left:-54px">
         <li>Jl. Diponegoro No.9, Genteng Kulon,</li>
         <li>Genteng, Kabupaten Banyuwangi, Jawa Timur 68465</li>
         <li>(0333) 845844</li>
       </ul>
     </div>
-    <p>Invoice No : ha/res/0{{$invoice->id}}</p>
+    <p style="font-weight:bold">Bill Number : 0{{$invoice->id}}</p>
     <hr>
     <ul style="list-style:none;margin-left:-40px">
-      <li style="font-weight:bold">Atas Nama:</li>
-      <li>{{$invoice->reservation->customer->name}}</li>
+      <li style="font-weight:bold">Customer Name:</li>
+      <li class="w3-right" style="font-weight:bold">Address:</li>
+      <li class="">{{$invoice->reservation->customer->name}}</li>
+      <li class="w3-right" style="margin-right:-60px">{{trim(substr($invoice->reservation->customer->address,0,30))}}</li>
     </ul>
 
     <table class="collapse" style="width:100%;">
         {{-- table head kamar --}}
         <tr class="tengah w3-light-gray">
-          <th class="kiri border-right" >Nama Kamar</th>
-          <th>Jumlah Menginap</th>
-          <th>Harga per Malam</th>
+          <th class="kiri border-right" >Room(s)</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
           <th class="kanan">Total</th>
         </tr>
         {{-- End of table head kamar --}}
@@ -73,45 +75,45 @@
         <tr>
           <td>{{$rooms->name}}</td>
           <td class="tengah">{{$days}}</td>
-          <td class="kanan">Rp. {{number_format($rooms->price, 0, '', '.')}},-</td>
-          <td class="kanan">Rp. {{number_format($rooms->price * $days, 0, '', '.')}},-</td>
+          <td class="kanan">Rp {{number_format($rooms->price, 0, '', '.')}}</td>
+          <td class="kanan">Rp {{number_format($rooms->price * $days, 0, '', '.')}}</td>
         </tr>
         @endforeach
 
         {{-- Bagian additional --}}
         {{-- head --}}
         <tr class="tengah w3-light-gray">
-          <th class="kiri">Nama Tambahan</th>
-          <th>Jumlah</th>
-          <th>Harga Satuan</th>
-          <th class="kanan">Subtotal</th>
+          <th class="kiri">Additional(s)</th>
+          <th>Quantity</th>
+          <th class="tengah">Subtotal</th>
+          <th class="kanan">Total</th>
         </tr>
         {{-- End of head --}}
         @foreach ($invoice->additionals as $additionals)
         <tr>
           <td>{{$additionals->name}}</td>
           <td class="tengah">{{$additionals->pivot->quantity}}</td>
-          <td class="kanan">Rp. {{number_format($additionals->price, 0, '', '.')}},-</td>
-          <td class="kanan">Rp. {{number_format($additionals->price * $additionals->pivot->quantity, 0, '', '.')}},-</td>
+          <td class="kanan">Rp {{number_format($additionals->price, 0, '', '.')}}</td>
+          <td class="kanan">Rp {{number_format($additionals->price * $additionals->pivot->quantity, 0, '', '.')}}</td>
         </tr>
         @endforeach
         <tr>
           <td></td>
           <td></td>
           <td class="kanan" style="font-weight:bold">Total</td>
-          <td class="kanan">Rp. {{number_format($invoice->total, 0, '', '.')}},-</td>
+          <td class="kanan">Rp {{number_format($invoice->total, 0, '', '.')}}</td>
         </tr>
         <tr>
           <td></td>
           <td></td>
           <td class="kanan" style="font-weight:bold">DP</td>
-          <td class="kanan">Rp. {{number_format($invoice->reservation->dp, 0, '', '.')}},-</td>
+          <td class="kanan">Rp {{number_format($invoice->reservation->dp, 0, '', '.')}}</td>
         </tr>
         <tr>
           <td></td>
           <td></td>
           <td class="kanan" style="font-weight:bold">Tagihan</td>
-          <td class="kanan w3-light-gray">Rp. {{number_format($invoice->total - $invoice->reservation->dp, 0, '', '.')}},-</td>
+          <td class="kanan w3-light-gray">Rp {{number_format($invoice->total - $invoice->reservation->dp, 0, '', '.')}}</td>
         </tr>
     </table>
   </body>
