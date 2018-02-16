@@ -49,6 +49,9 @@
                         @else
                         @if (Auth::id() == 1)
                           {{-- <ul class="nav navbar-nav navbar-right"> --}}
+                              <li><a href="/register/">Register New User</a></li>
+                          {{-- </ul> --}}
+                          {{-- <ul class="nav navbar-nav navbar-right"> --}}
                               <li><a href="/room/">Rooms</a></li>
                           {{-- </ul> --}}
                           {{-- <ul class="nav navbar-nav navbar-right"> --}}
@@ -57,6 +60,7 @@
                           {{-- <ul class="nav navbar-nav navbar-right"> --}}
                               <li><a href="/report/">Reports</a></li>
                           {{-- </ul> --}}
+
                         @endif
                           {{-- <ul class="nav navbar-nav navbar-right"> --}}
                               <li><a href="/customer/">Customers</a></li>
@@ -102,5 +106,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/master.js') }}"></script>
 </body>
 </html>

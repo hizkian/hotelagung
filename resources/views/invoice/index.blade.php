@@ -54,7 +54,7 @@
                   </div>
 
                   <div class="panel-footer">
-                    <a class="btn btn-warning" href="/invoice/print/{{$invoice->id}}">Print</a>
+                    <a class="btn btn-warning" target="_blank" href="/invoice/print/{{$invoice->id}}">Print</a>
                   </div>
               </div>
             @endforeach

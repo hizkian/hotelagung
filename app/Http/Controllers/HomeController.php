@@ -105,8 +105,8 @@ class HomeController extends Controller
     {
       $this->validate($req, [
         'name'   => 'required|max:50',
-        'no_ktp' => 'required|min:16|max:16|regex:/[0-9]*/',
-        'no_hp' => 'required|min:9|max:16|regex:/[0-9]*/',
+        'no_ktp' => 'required|regex:/[0-9]*/',
+        'no_hp' => 'required|regex:/[0-9]*/',
         'dp' => 'required|integer',
         'address' => 'required|max:200',
         'room' => 'required'
@@ -187,12 +187,19 @@ class HomeController extends Controller
       $total = $reservation->total;
 
       if ($req->additionals != null) {
-        # code...
+        foreach ($req->additionals as $kadd => $additional) {
+            $add = Additional::find($additional);
+            $total += $add->price * $req->quantities[$kadd];
+          }
       }
-      for ($i=0; $i < count($req->additionals); $i++) {
-        $additional = Additional::find($req->additionals[$i]);
-        $total += $additional->price * $req->quantities[$i];
-      }
+
+
+
+    //   for ($i=0; $i < count($req->additionals); $i++) {
+    //     $additional = Additional::find($req->additionals[$i]);
+    //     $total += $additional->price * $req->quantities[$i];
+    //   }
+
       $invoice->total = $total;
       $invoice->report_id = $report->id;
       $invoice->save();
@@ -201,14 +208,23 @@ class HomeController extends Controller
       $report->save();
 
       // dd($req->quantities);
-
-      for ($i=0; $i < count($req->additionals); $i++) {
-        $additional = Additional::find($req->additionals[$i]);
+      if ($req->additionals != null) {
+      foreach ($req->additionals as $kadd => $additional) {
+        $add = Additional::find($additional);
         // $invoice->additionals()->save($additional, ['quantity' => $req->quantites[$i]]);
         $invoice->additionals()->attach(
-          [$req->additionals[$i] => ['quantity' => $req->quantities[$i]]]
+          [$additional => ['quantity' => $req->quantities[$kadd]]]
         );
       }
+      }
+
+    //   for ($i=0; $i < count($req->additionals); $i++) {
+    //     $additional = Additional::find($req->additionals[$i]);
+    //     // $invoice->additionals()->save($additional, ['quantity' => $req->quantites[$i]]);
+    //     $invoice->additionals()->attach(
+    //       [$req->additionals[$i] => ['quantity' => $req->quantities[$i]]]
+    //     );
+    //   }
       foreach ($reservation->rooms as $room) {
         $room->status = 0;
         $room->save();
@@ -325,8 +341,7 @@ class HomeController extends Controller
     {
       $invoice = Invoice::find($id);
       $pdf = PDF::loadView('invoice.pdf', ['invoice' => $invoice]);
-      return $pdf->stream('invoice.pdf');
-      // return view('invoice.pdf', compact('invoice'));
+      return $pdf->stream('invoice-' . $invoice->reservation->customer->name . '.pdf');
     }
 
     //==========REPORT==========//
@@ -349,7 +364,6 @@ class HomeController extends Controller
         }
       }
       $pdf = PDF::loadView('report.pdf', ['report' => $report, 'additionaltotal' => $additionaltotal, 'roomtotal' => $roomtotal]);
-      return $pdf->stream('report.pdf');
-      // return view('invoice.pdf', compact('invoice'));
+      return $pdf->stream('report-' . date('F', strtotime($report->created_at)) . '-' . $report->year . '.pdf');
     }
 }

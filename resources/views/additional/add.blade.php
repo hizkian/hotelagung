@@ -39,14 +39,14 @@
               <div class="panel-heading">Add Additional</div>
 
               <div class="panel-body">
-                <form class="" action="/additional/add" method="post">
+                <form class="" action="/additional/add" method="post" onsubmit="return checkForm(this);">
                   <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" required autofocus>
                   </div>
                   <div class="form-group">
                     <label for="price">Price</label>
-                    <input type="text" name="price" class="form-control">
+                    <input type="text" name="price" class="form-control" required>
                   </div>
                   {{csrf_field()}}
                   <button type="submit" name="submit">Submit</button>
