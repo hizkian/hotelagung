@@ -31,20 +31,20 @@
   <body>
     <div class="w3-display-container">
       <h1 class="w3-left">Hotel Agung</h1>
-      <h3 class="w3-text-grey w3-right">Laporan Invoice</h3>
+      <h3 class="w3-text-grey w3-right">Invoice Report</h3>
     </div>
 
     <div class="w3-container">
      {{-- {{print_r($harga->where('kamar', 'Anggrek 2')[1]['harga'])}} --}}
-      <ul style="list-style:none;margin-left:-40px">
+      <ul style="list-style:none;margin-left:-54px">
         <li>Jl. Diponegoro No.9, Genteng Kulon,</li>
         <li>Genteng, Kabupaten Banyuwangi, Jawa Timur 68465</li>
         <li>(0333) 845844</li>
       </ul>
     </div>
     <hr>
-    <ul style="list-style:none;margin-left:-40px">
-      <li style="font-weight:bold">Bulan : {{date('F Y', strtotime($report->created_at))}}</li>
+    <ul style="list-style:none;margin-left:-54px">
+      <li style="font-weight:bold;margin-left:14px">{{date('F Y', strtotime($report->created_at))}}</li>
       <li></li>
     </ul>
 
@@ -52,8 +52,9 @@
         {{-- table head laporan --}}
         <tr class="w3-light-gray tengah">
           <th style="width:25px">No</th>
-          <th class="tengah">Nomor Invoice</th>
-          <th class="tengah" style="width:200px">Subtotal</th>
+          <th class="tengah">Invoice Number</th>
+          <th class="tengah">Customer Name</th>
+          <th class="kanan" style="width:200px">Subtotal</th>
         </tr>
 
         {{-- Table Content --}}
@@ -61,7 +62,8 @@
         @foreach ($report->invoices as $invoice)
           <tr>
             <td class="tengah">{{$count}}</td>
-            <td>ha/res/0{{$invoice->id}}</td>
+            <td>0{{$invoice->id}}</td>
+            <td>{{$invoice->reservation->customer->name}}</td>
             <td class="kanan"> {{number_format($invoice->total, 0, '', ',')}}</td>
           </tr>
           {{$count++}}
@@ -74,6 +76,7 @@
         {{-- Total Invoice --}}
         <tr>
           <td style="border:0px"></td>
+          <td style="border:0px"></td>
           <th class="kanan">Total</th>
           <td class="kanan"> {{number_format($report->total, 0, '', ',')}}</td>
         </tr>
@@ -83,27 +86,27 @@
     {{-- Table Detail rooms & Additionals --}}
     <div class="w3-display-container">
       <h1 class="w3-left">Hotel Agung</h1>
-      <h3 class="w3-text-grey w3-right">Additionals and Rooms Total</h3>
+      <h3 class="w3-text-grey w3-right">Total Income Report</h3>
     </div>
 
     <div class="w3-container">
      {{-- {{print_r($harga->where('kamar', 'Anggrek 2')[1]['harga'])}} --}}
-      <ul style="list-style:none;margin-left:-40px">
+      <ul style="list-style:none;margin-left:-54px">
         <li>Jl. Diponegoro No.9, Genteng Kulon,</li>
         <li>Genteng, Kabupaten Banyuwangi, Jawa Timur 68465</li>
         <li>(0333) 845844</li>
       </ul>
     </div>
     <hr>
-    <ul style="list-style:none;margin-left:-40px">
-      <li style="font-weight:bold">Bulan : {{date('F Y', strtotime($report->created_at))}}</li>
+    <ul style="list-style:none;margin-left:-54px">
+      <li style="font-weight:bold;margin-left:14px">{{date('F Y', strtotime($report->created_at))}}</li>
       <li></li>
     </ul>
     <table>
       {{-- Table Head --}}
       <tr class="w3-light-gray tengah">
         <th style="width:25px">No</th>
-        <th>Nama</th>
+        <th>Item</th>
         <th style="width:200px">Subtotal</th>
       </tr>
       {{-- End of table head --}}
@@ -116,7 +119,7 @@
       </tr>
       <tr>
         <td class="tengah">2</td>
-        <td>Additional</td>
+        <td>Additionals</td>
         <td class="kanan"> {{number_format($additionaltotal, 0, '', ',')}}</td>
       </tr>
 
@@ -132,31 +135,31 @@
     {{-- Table Additonal details --}}
     <div class="w3-display-container">
       <h1 class="w3-left">Hotel Agung</h1>
-      <h3 class="w3-text-grey w3-right">Additionals Detail</h3>
+      <h3 class="w3-text-grey w3-right">Additionals Report</h3>
     </div>
 
     <div class="w3-container">
      {{-- {{print_r($harga->where('kamar', 'Anggrek 2')[1]['harga'])}} --}}
-      <ul style="list-style:none;margin-left:-40px">
+      <ul style="list-style:none;margin-left:-54px">
         <li>Jl. Diponegoro No.9, Genteng Kulon,</li>
         <li>Genteng, Kabupaten Banyuwangi, Jawa Timur 68465</li>
         <li>(0333) 845844</li>
       </ul>
     </div>
     <hr>
-    <ul style="list-style:none;margin-left:-40px">
-      <li style="font-weight:bold">Bulan : {{date('F Y', strtotime($report->created_at))}}</li>
+    <ul style="list-style:none;margin-left:-54px">
+      <li style="font-weight:bold;margin-left:14px">{{date('F Y', strtotime($report->created_at))}}</li>
       <li></li>
     </ul>
     <table>
       <tr class="w3-light-gray tengah">
         <th style="width:25px">No</th>
-        <th>Nomor Invoice</th>
-        <th>Nama Customer</th>
-        <th>Nama Barang</th>
-        <th>Harga Satuan</th>
+        <th>Invoice Number</th>
+        <th>Customer Name</th>
+        <th>Item</th>
+        <th>Subtotal</th>
         <th>Quantity</th>
-        <th style="width:200px">Subtotal</th>
+        <th style="width:200px">Total</th>
       </tr>
       {{-- Table Content --}}
       {{$count = 1}}
@@ -164,7 +167,7 @@
         @foreach ($invoice->additionals as $additional)
           <tr>
             <td class="tengah">{{$count}}</td>
-            <td>ha/res/0{{$invoice->id}}</td>
+            <td>0{{$invoice->id}}</td>
             <td>{{$invoice->reservation->customer->name}}</td>
             <td>{{$additional->name}}</td>
             <td class="kanan"> {{number_format($additional->price, 0, '', ',')}}</td>
@@ -190,31 +193,31 @@
     <div class="page-break"></div>
     <div class="w3-display-container">
       <h1 class="w3-left">Hotel Agung</h1>
-      <h3 class="w3-text-grey w3-right">Rooms Detail</h3>
+      <h3 class="w3-text-grey w3-right">Rooms Report</h3>
     </div>
 
     <div class="w3-container">
      {{-- {{print_r($harga->where('kamar', 'Anggrek 2')[1]['harga'])}} --}}
-      <ul style="list-style:none;margin-left:-40px">
+      <ul style="list-style:none;margin-left:-54px">
         <li>Jl. Diponegoro No.9, Genteng Kulon,</li>
         <li>Genteng, Kabupaten Banyuwangi, Jawa Timur 68465</li>
         <li>(0333) 845844</li>
       </ul>
     </div>
     <hr>
-    <ul style="list-style:none;margin-left:-40px">
-      <li style="font-weight:bold">Bulan : {{date('F Y', strtotime($report->created_at))}}</li>
+    <ul style="list-style:none;margin-left:-54px">
+      <li style="font-weight:bold;margin-left:14px">{{date('F Y', strtotime($report->created_at))}}</li>
       <li></li>
     </ul>
     <table>
       <tr class="w3-light-gray tengah">
         <th style="width:25px">No</th>
-        <th>Nomor Invoice</th>
-        <th>Nama Customer</th>
-        <th>Nama Kamar</th>
-        <th>Harga Per Malam</th>
-        <th>Jumlah Hari</th>
-        <th style="width:200px">Subtotal</th>
+        <th>Invoice Number</th>
+        <th>Customer Name</th>
+        <th>Room</th>
+        <th>Subtotal</th>
+        <th>Quantity</th>
+        <th style="width:200px">Total</th>
       </tr>
       {{-- Table Content --}}
       {{$count = 1}}
@@ -226,7 +229,7 @@
         @foreach ($invoice->reservation->rooms as $room)
           <tr>
             <td class="tengah">{{$count}}</td>
-            <td>ha/res/0{{$invoice->id}}</td>
+            <td>0{{$invoice->id}}</td>
             <td>{{$invoice->reservation->customer->name}}</td>
             <td>{{$room->name}}</td>
             <td class="kanan"> {{number_format($room->price, 0, '', ',')}}</td>
