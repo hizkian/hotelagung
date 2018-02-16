@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style media="screen">
+    .btn.btn-primary[disabled] {
+      background-color: #70bae1;
+    }
+    </style>
 </head>
 <body>
     <div id="app">
