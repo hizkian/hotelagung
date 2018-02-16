@@ -185,6 +185,10 @@ class HomeController extends Controller
       $invoice = new Invoice;
       $invoice->reservation_id = $req->reservation_id;
       $total = $reservation->total;
+
+      if ($req->additionals != null) {
+        # code...
+      }
       for ($i=0; $i < count($req->additionals); $i++) {
         $additional = Additional::find($req->additionals[$i]);
         $total += $additional->price * $req->quantities[$i];
