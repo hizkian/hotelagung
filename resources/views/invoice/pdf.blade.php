@@ -49,11 +49,13 @@
         <li>(0333) 845844</li>
       </ul>
     </div>
-    <p>Bill Number : 0{{$invoice->id}}</p>
+    <p style="font-weight:bold">Bill Number : 0{{$invoice->id}}</p>
     <hr>
     <ul style="list-style:none;margin-left:-40px">
       <li style="font-weight:bold">Customer Name:</li>
-      <li>{{$invoice->reservation->customer->name}}</li>
+      <li class="w3-right" style="font-weight:bold">Address:</li>
+      <li class="">{{$invoice->reservation->customer->name}}</li>
+      <li class="w3-right" style="margin-right:-60px">{{trim(substr($invoice->reservation->customer->address,0,30))}}</li>
     </ul>
 
     <table class="collapse" style="width:100%;">
