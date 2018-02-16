@@ -72,6 +72,9 @@
                           {{-- <ul class="nav navbar-nav navbar-right"> --}}
                               <li><a href="/invoice/">Invoices</a></li>
                           {{-- </ul> --}}
+                          {{-- <ul class="nav navbar-nav navbar-right"> --}}
+                              <li><a href="/dailyreport/">Daily Reports</a></li>
+                          {{-- </ul> --}}
 
 
                             <li class="dropdown">

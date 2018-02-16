@@ -51,7 +51,12 @@
             @endif
 
             @foreach ($rooms as $room)
-              <div class="panel panel-default">
+              @if ($room->status == 0)
+                <div class="panel panel-default panel-success">
+              @else
+                <div class="panel panel-default panel-danger">
+              @endif
+
                   <div class="panel-heading">
                     {{$room->name}}
                     <span class="pull-right">Rp. {{$room->price}}</span>

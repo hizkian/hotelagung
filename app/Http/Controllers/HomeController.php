@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function indexRoom()
     {
-      $rooms = Room::all();
+      $rooms = Room::orderBy('status')->get();
       return view('room.index', compact('rooms'));
     }
 
