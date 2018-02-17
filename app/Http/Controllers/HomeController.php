@@ -275,6 +275,13 @@ class HomeController extends Controller
       return redirect('/customer/')->with('message', 'Customer has been edited!');
     }
 
+    public function dailyReport()
+    {
+      $reservations = Reservation::where('checkout', date('Y-m-d'))->get();
+      $pdf = PDF::loadView('customer.dailyreportpdf', ['reservations' => $reservations]);
+      return $pdf->stream('dailyreport-' . date('Y-m-d') . '.pdf');
+    }
+
     //==========ADDITIONAL==========//
 
     public function indexAdditional()

@@ -39,7 +39,7 @@
               <div class="panel-heading">Edit Room</div>
 
               <div class="panel-body">
-                <form class="" action="/room/edit" method="post" onsubmit="return checkForm(this);">
+                <form class="" action="/room/edit/" method="post" onsubmit="return checkForm(this);">
                   <input type="text" name="id" value="{{$room->id}}" class="hidden">
                   <div class="form-group">
                     <label for="name">Name</label>

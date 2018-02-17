@@ -57,7 +57,7 @@
                   </div>
 
                   <div class="panel-footer">
-                    <a class="btn btn-warning" href="/customer/edit/{{$customer->id}}">Edit</a>
+                    <a class="btn btn-warning" href="/customer/edit/{{$customer->id}}/">Edit</a>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$customer->id}}">
                       Delete
                     </button>
@@ -90,7 +90,7 @@
                           </div>
                           <div class="modal-footer">
 
-                            <form class="" action="/customer/delete/{{$customer->id}}" method="get">
+                            <form class="" action="/customer/delete/{{$customer->id}}/" method="get">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                               <button type="submit" class="btn btn-danger">Delete</button>
                             </form>

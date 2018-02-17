@@ -39,7 +39,7 @@
               <div class="panel-heading">Edit Additional</div>
 
               <div class="panel-body">
-                <form class="" action="/additional/edit" method="post" onsubmit="return checkForm(this);">
+                <form class="" action="/additional/edit/" method="post" onsubmit="return checkForm(this);">
                   <input type="text" name="id" value="{{$additional->id}}" class="hidden">
                   <div class="form-group">
                     <label for="name">Name</label>

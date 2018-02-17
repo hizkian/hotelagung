@@ -36,7 +36,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="">
-              <a href="/room/add" class="btn btn-primary form-control">New Room</a>
+              <a href="/room/add/" class="btn btn-primary form-control">New Room</a>
             </div>
             <br>
 
@@ -64,7 +64,7 @@
 
                   <div class="panel-footer">
 
-                      <a class="btn btn-warning" href="/room/edit/{{$room->id}}">Edit</a>
+                      <a class="btn btn-warning" href="/room/edit/{{$room->id}}/">Edit</a>
 
                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$room->id}}">
                         Delete
@@ -98,7 +98,7 @@
                             </div>
                             <div class="modal-footer">
 
-                              <form class="" action="/room/delete/{{$room->id}}" method="get">
+                              <form class="" action="/room/delete/{{$room->id}}/" method="get">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                 <button type="submit" class="btn btn-danger">Delete</button>
                               </form>

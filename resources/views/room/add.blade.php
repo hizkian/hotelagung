@@ -39,7 +39,7 @@
               <div class="panel-heading">Add Room</div>
 
               <div class="panel-body">
-                <form class="" action="/room/add" method="post" onsubmit="return checkForm(this);">
+                <form class="" action="/room/add/" method="post" onsubmit="return checkForm(this);">
                   <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" name="name" class="form-control" required autofocus>

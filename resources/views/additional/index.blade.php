@@ -46,7 +46,7 @@
             @endif
 
             <div class="">
-              <a href="/additional/add" class="btn btn-primary btn-block">New Additional</a>
+              <a href="/additional/add/" class="btn btn-primary btn-block">New Additional</a>
             </div><br>
 
             @foreach ($additionals as $additional)
@@ -57,7 +57,7 @@
                   </div>
 
                   <div class="panel-footer">
-                    <a class="btn btn-warning" href="/additional/edit/{{$additional->id}}">Edit</a>
+                    <a class="btn btn-warning" href="/additional/edit/{{$additional->id}}/">Edit</a>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$additional->id}}">
                       Delete
                     </button>
@@ -90,7 +90,7 @@
                           </div>
                           <div class="modal-footer">
 
-                            <form class="" action="/additional/delete/{{$additional->id}}" method="get">
+                            <form class="" action="/additional/delete/{{$additional->id}}/" method="get">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                               <button type="submit" class="btn btn-danger">Delete</button>
                             </form>

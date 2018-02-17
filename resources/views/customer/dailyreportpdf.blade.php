@@ -44,7 +44,7 @@
     </div>
     <hr>
     <ul style="list-style:none;margin-left:-54px">
-      <li style="font-weight:bold;margin-left:14px">{{date('F Y', strtotime($report->created_at))}}</li>
+      <li style="font-weight:bold;margin-left:14px">{{date('d F Y')}}</li>
       <li></li>
     </ul>
 
@@ -58,16 +58,16 @@
         </tr>
 
         {{-- Table Content --}}
-        {{-- {{$count = 1}}
-        @foreach ($report->invoices as $invoice)
+        {{$count = 1}}
+        @foreach ($reservations as $reservation)
           <tr>
             <td class="tengah">{{$count}}</td>
-            <td>0{{$invoice->id}}</td>
-            <td>{{$invoice->reservation->customer->name}}</td>
-            <td class="kanan"> {{number_format($invoice->total, 0, '', ',')}}</td>
+            <td>{{$reservation->customer->name}}</td>
+            <td>{{$reservation->customer->no_ktp}}</td>
+            <td>{{$reservation->customer->address}}</td>
           </tr>
           {{$count++}}
-        @endforeach --}}
+        @endforeach
 
         {{-- End of table content --}}
     </table>

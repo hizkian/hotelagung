@@ -38,7 +38,7 @@
           <!-- Button trigger modal -->
 
             <div class="">
-              <a href="/reservation/create" class="btn btn-primary form-control">New Reservation</a>
+              <a href="/reservation/create/" class="btn btn-primary form-control">New Reservation</a>
             </div>
             <br>
 
@@ -72,7 +72,7 @@
 
                   <div class="panel-footer">
                     {{-- <a class="btn btn-warning" href="/reservation/manage/{{$reservation->id}}"><i class="fa fa-gear"></i> Manage</a> --}}
-                    <a class="btn btn-danger" href="/reservation/checkout/{{$reservation->id}}"><i class="fa fa-sign-out"></i> Checkout</a>
+                    <a class="btn btn-danger" href="/reservation/checkout/{{$reservation->id}}/"><i class="fa fa-sign-out"></i> Checkout</a>
                   </div>
               </div>
             @endforeach
