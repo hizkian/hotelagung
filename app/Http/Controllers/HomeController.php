@@ -31,7 +31,9 @@ class HomeController extends Controller
     public function indexRoom()
     {
       $rooms = Room::orderBy('status')->get();
-      return view('room.index', compact('rooms'));
+      $count1 = Room::where('status', 1)->count();
+      $count2 = Room::count();
+      return view('room.index', compact('rooms', 'count1', 'count2'));
     }
 
     public function addRoom()
@@ -370,7 +372,8 @@ class HomeController extends Controller
           $additionaltotal += $additional->price * $additional->pivot->quantity;
         }
       }
-      $pdf = PDF::loadView('report.pdf', ['report' => $report, 'additionaltotal' => $additionaltotal, 'roomtotal' => $roomtotal]);
+      $countroom = Room::count();
+      $pdf = PDF::loadView('report.pdf', ['report' => $report, 'additionaltotal' => $additionaltotal, 'roomtotal' => $roomtotal, 'countroom' => $countroom]);
       return $pdf->stream('report-' . date('F', strtotime($report->created_at)) . '-' . $report->year . '.pdf');
     }
 }

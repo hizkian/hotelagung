@@ -220,11 +220,12 @@
       </tr>
       {{-- Table Content --}}
       {{$count = 1}}
-      {{$days = (int)date_diff(date_create($invoice->reservation->checkin), date_create(date('Y-m-d')))->format("%a")}}
-      @if ($days == 0)
-        {{$days = 1}}
-      @endif
+      {{$quantity = 0}}
       @foreach ($report->invoices as $invoice)
+        {{$days = (int)date_diff(date_create($invoice->reservation->checkin), date_create($invoice->reservation->checkout))->format("%a")}}
+        @if ($days == 0)
+          {{$days = 1}}
+        @endif
         @foreach ($invoice->reservation->rooms as $room)
           <tr>
             <td class="tengah">{{$count}}</td>
@@ -236,6 +237,7 @@
             <td class="kanan"> {{number_format($days * $room->price, 0, '', ',')}}</td>
           </tr>
           {{$count++}}
+          {{$quantity += $days}}
         @endforeach
       @endforeach
       {{-- End of Table Content --}}
@@ -247,6 +249,16 @@
         <td></td>
         <th class="kanan">Total</th>
         <td class="kanan"> {{number_format($roomtotal, 0, '', ',')}}</td>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <th class="kanan">Occupancy</th>
+        <td class="kanan"> {{number_format((float) $quantity / (cal_days_in_month(CAL_GREGORIAN, $report->month, $report->year) * $countroom) * 100, 2, '.', '')}}%</td>
       </tr>
 
     </table>

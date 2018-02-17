@@ -36,14 +36,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="">
-<<<<<<< HEAD
-              <a href="/room/add/" class="btn btn-primary form-control">New Room</a>
-=======
-              <h2>Occupancy : 60%</h2>
+              <h2>Occupancy : {{number_format((float)($count1/$count2)*100, 2, '.', '')}}%</h2>
             </div>
             <div class="">
               <a href="/room/add" class="btn btn-primary form-control">New Room</a>
->>>>>>> c25e1fb6f190ef3e7a6d2421131dd27b63e33cd8
             </div>
             <br>
 

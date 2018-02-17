@@ -58,5 +58,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'regisadmin' => \App\Http\Middleware\AdminRegister::class,
+        'disablepreventback' => \App\Http\Middleware\DisablePreventBack::class,
     ];
 }
