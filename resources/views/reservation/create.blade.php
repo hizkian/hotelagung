@@ -39,7 +39,7 @@
               <div class="panel-heading">New Reservation</div>
 
               <div class="panel-body">
-                <form class="" action="/reservation/create" method="post" onsubmit="return checkForm(this);">
+                <form class="" action="/reservation/create/" method="post" onsubmit="return checkForm(this);">
                   <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" name="name" class="form-control" required autofocus>
@@ -97,7 +97,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
 
-  
+
 
   $(document).ready(function(){
     var count = 0;
