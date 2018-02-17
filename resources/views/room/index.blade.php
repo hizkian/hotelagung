@@ -36,6 +36,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="">
+              <h2>Occupancy : 60%</h2>
+            </div>
+            <div class="">
               <a href="/room/add" class="btn btn-primary form-control">New Room</a>
             </div>
             <br>
@@ -46,7 +49,7 @@
                   <i class="fa fa-circle fa-stack-2x"></i>
                   <i class="fa fa-times fa-stack-1x fa-inverse"></i>
                 </span>
-                  No additionals registered!
+                  No room registered!
               </div>
             @endif
 
