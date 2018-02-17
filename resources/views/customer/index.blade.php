@@ -33,8 +33,13 @@
       @endforeach
     @endif
 <div class="container">
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+          <div class="">
+            <a href="/customer/dailyreport/" class="btn btn-primary form-control">Download Daily Report</a>
+          </div>
+          <br>
             @if (count($customers) == 0)
               <div class="alert alert-danger">
                 <span class="fa-stack fa-lg close-button">
