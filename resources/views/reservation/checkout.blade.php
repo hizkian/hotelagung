@@ -131,11 +131,11 @@
         alert('Please choose first!');
       } else {
         //close button
-        var close = "<button type='button' class='close pull-right' aria-label='close' value='" + additionalprice + "'><span aria-hidden='true'>&times;</span></button>"
+        var close = "<button type='button' class='close pull-right' aria-label='close' value='" + additionalprice + "'><span style='color:red;' aria-hidden='true'>X</span></button>"
 
-        var quantitystr = "<span class='pull-right'> Quantity : " + quantity + "</span>"
+        var quantitystr = "<span class='pull-right'> Quantity : " + quantity + "&nbsp;&nbsp;</span>"
 
-        var string = additional + " " + quantitystr + " " + close;
+        var string = additional + " " + close + " " + quantitystr;
 
         //added rooms detail
         $("#container").append("<div id='additional" + additionalid + "' class='alert alert-success'><p>" + string + "</p><input class='hidden' type='text' value='" + additionalid + "' name='additionals[" + count + "]'><input class='hidden' type='text' value='" + quantity + "' name='quantities[" + count + "]'>");

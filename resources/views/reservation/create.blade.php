@@ -39,7 +39,7 @@
               <div class="panel-heading">New Reservation</div>
 
               <div class="panel-body">
-                <form class="" action="/reservation/create/" method="post" onsubmit="return checkForm(this);">
+                <form id="fr" class="" action="/reservation/create" method="post" onsubmit="return checkForm(this);">
                   <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" name="name" class="form-control" required autofocus>
@@ -59,7 +59,7 @@
                   </div>
                   <div class="form-group">
                     <label for="room">Choose Room</label>
-                    <select id="room" class="form-control" name="room">
+                    <select id="room" class="form-control" name="room" required>
                       <option value="" disabled selected></option>
                       @foreach ($rooms as $room)
                         <option id="{{$room->id}}" value="{{$room->price}}">{{ $room->name }}</option>
@@ -86,7 +86,7 @@
 
                   {{csrf_field()}}
                   <div class="form-group">
-                    <button type="submit" name="submit" class="form-control btn btn-primary pull-right">Submit</button>
+                    <button id="sb" type="submit" name="submit" class="form-control btn btn-primary pull-right">Submit</button>
                   </div>
                 </form>
               </div>
@@ -100,6 +100,12 @@
 
 
   $(document).ready(function(){
+    if ( $("#container").children().length==1){
+      $("#sb").prop('disabled', true);
+    } else {
+      $("#sb").prop('disabled', false);
+    }
+
     var count = 0;
     $("#add").click(function(){
       var a = document.getElementById("room");
@@ -116,7 +122,7 @@
         alert('Please choose the Room first!');
       } else {
         //close button
-        var close = "<button type='button' class='close' aria-label='close' value='" + roomprice + "'><span aria-hidden='true'>&times;</span></button>"
+        var close = "<button type='button' class='close' aria-label='close' value='" + roomprice + "'><span style='font-size:25px;color:red' aria-hidden='true'>X</span></button>"
 
         var string = room + " " + close;
 
@@ -124,6 +130,11 @@
         $("#container").append("<div id='room" + roomid + "' class='alert alert-success'><p>" + string + "</p><input class='hidden' type='text' value='" + roomid + "' name='room[" + count + "]'>");
         count++;
 
+        if ( $("#container").children().length==1){
+          $("#sb").prop('disabled', true);
+        } else {
+          $("#sb").prop('disabled', false);
+        }
 
         $("#total").html(parseInt($("#total").html()) + roomprice);
       }
@@ -132,9 +143,16 @@
     });
 
 
+
+
     $(document).on('click','.close',function(){
         $("#total").html(parseInt($("#total").html()) - parseInt($(this).val()));
         $(this).parent().parent().remove();
+        if ( $("#container").children().length==1){
+          $("#sb").prop('disabled', true);
+        } else {
+          $("#sb").prop('disabled', false);
+        }
     });
   });
   </script>
