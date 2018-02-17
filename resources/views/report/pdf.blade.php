@@ -206,7 +206,7 @@
     <hr>
     <ul style="list-style:none;margin-left:-54px">
       <li style="font-weight:bold;margin-left:14px">{{date('F Y', strtotime($report->created_at))}}</li>
-      <li></li>
+      <li style="font-weight:bold;margin-left:14px">Occupancy:82.3%</li>
     </ul>
     <table>
       <tr class="w3-light-gray tengah">
