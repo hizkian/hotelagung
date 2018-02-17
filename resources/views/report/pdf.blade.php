@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{{-- {{dd($invoice)}} --}}
 <html>
   <head>
     <meta charset="utf-8">
