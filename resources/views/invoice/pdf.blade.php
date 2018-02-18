@@ -47,8 +47,9 @@
         <li>Jl. Diponegoro No.9, Genteng Kulon,</li>
         <li>Genteng, Kabupaten Banyuwangi, Jawa Timur 68465</li>
         <li>(0333) 845844</li>
-        <li>Admin cekin: {{$invoice->reservation->user->name}}</li>
-        <li>Admin cekout: {{$user}}</li>
+        <li><hr></li>
+        <li>Check In: {{$invoice->reservation->user->name}}</li>
+        <li>Check Out: {{$user}}</li>
       </ul>
     </div>
     <p style="font-weight:bold">Bill Number : 0{{$invoice->id}}</p>
@@ -108,13 +109,13 @@
         <tr>
           <td></td>
           <td></td>
-          <td class="kanan" style="font-weight:bold">DP</td>
+          <td class="kanan" style="font-weight:bold">Paid</td>
           <td class="kanan">Rp {{number_format($invoice->reservation->dp, 0, '', '.')}}</td>
         </tr>
         <tr>
           <td></td>
           <td></td>
-          <td class="kanan" style="font-weight:bold">Tagihan</td>
+          <td class="kanan" style="font-weight:bold">Total Due</td>
           <td class="kanan w3-light-gray">Rp {{number_format($invoice->total - $invoice->reservation->dp, 0, '', '.')}}</td>
         </tr>
     </table>
