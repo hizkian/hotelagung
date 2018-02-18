@@ -349,7 +349,8 @@ class HomeController extends Controller
     public function printInvoice($id)
     {
       $invoice = Invoice::find($id);
-      $pdf = PDF::loadView('invoice.pdf', ['invoice' => $invoice]);
+      $user = Auth::user()->name;
+      $pdf = PDF::loadView('invoice.pdf', ['invoice' => $invoice, 'user' => $user]);
       return $pdf->stream('invoice-' . $invoice->reservation->customer->name . '.pdf');
     }
 

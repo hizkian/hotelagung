@@ -40,7 +40,7 @@
               <div class="panel-heading">Edit Customer Data</div>
 
               <div class="panel-body">
-                <form class="" action="/customer/edit/" method="post" onsubmit="return checkForm(this);">
+                <form class="" action="/customer/edit" method="post" onsubmit="return checkForm(this);">
                   <input type="text" name="id" value="{{$customer->id}}" class="hidden">
                   <div class="form-group">
                     <label for="name">Name</label>

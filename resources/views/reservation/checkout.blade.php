@@ -64,7 +64,7 @@
                   <li>Total room price per night: Rp. {{$reservation->total}},-</li>
                 </ul>
 
-                <form class="" action="/reservation/checkout/" method="post" onsubmit="return checkForm(this);">
+                <form class="" action="/reservation/checkout" method="post" onsubmit="return checkForm(this);">
                   <input type="text" name="reservation_id" value="{{$reservation->id}}" class="hidden">
                   <div class="form-group">
                     <label for="additional">Additional</label>

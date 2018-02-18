@@ -47,6 +47,8 @@
         <li>Jl. Diponegoro No.9, Genteng Kulon,</li>
         <li>Genteng, Kabupaten Banyuwangi, Jawa Timur 68465</li>
         <li>(0333) 845844</li>
+        <li>Admin cekin: {{$invoice->reservation->user->name}}</li>
+        <li>Admin cekout: {{$user}}</li>
       </ul>
     </div>
     <p style="font-weight:bold">Bill Number : 0{{$invoice->id}}</p>
