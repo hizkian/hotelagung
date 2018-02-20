@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
   protected $fillable = [
-      'customer_id', 'checkin', 'checkout', 'dp', 'total', 'user_id',
+      'customer_id', 'checkin', 'checkout', 'dp', 'total', 'user_id', 'checkout_user_id',
   ];
 
   public function invoice(){
@@ -19,6 +19,10 @@ class Reservation extends Model
   }
 
   public function user(){
+    return $this->belongsTo('App\Models\User');
+  }
+
+  public function checkout_user(){
     return $this->belongsTo('App\Models\User');
   }
 

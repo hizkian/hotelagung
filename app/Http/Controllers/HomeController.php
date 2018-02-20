@@ -128,6 +128,7 @@ class HomeController extends Controller
       $reservation->dp = $req->dp;
 
       $reservation->user_id = Auth::id();
+      $reservation->checkout_user_id = Auth::id();
       $reservation->save();
 
       foreach ($req->room as $room) {
@@ -174,6 +175,7 @@ class HomeController extends Controller
 
       $reservation = Reservation::find($req->reservation_id);
       $reservation->checkout = date('Y-m-d');
+      $reservation->checkout_user_id = Auth::id();
       $datediff = date_diff(date_create($reservation->checkin), date_create($reservation->checkout));
       $days = (int)$datediff->format("%a");
       if ($days == 0) {
@@ -349,8 +351,7 @@ class HomeController extends Controller
     public function printInvoice($id)
     {
       $invoice = Invoice::find($id);
-      $user = Auth::user()->name;
-      $pdf = PDF::loadView('invoice.pdf', ['invoice' => $invoice, 'user' => $user]);
+      $pdf = PDF::loadView('invoice.pdf', ['invoice' => $invoice]);
       return $pdf->stream('invoice-' . $invoice->reservation->customer->name . '.pdf');
     }
 
