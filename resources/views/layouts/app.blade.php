@@ -65,8 +65,6 @@
                           {{-- <ul class="nav navbar-nav navbar-right"> --}}
                               <li><a href="/report/">Reports</a></li>
                           {{-- </ul> --}}
-
-                        @endif
                           {{-- <ul class="nav navbar-nav navbar-right"> --}}
                               <li><a href="/customer/">Customers</a></li>
                           {{-- </ul> --}}
@@ -77,7 +75,30 @@
                           {{-- <ul class="nav navbar-nav navbar-right"> --}}
                               <li><a href="/invoice/">Invoices</a></li>
                           {{-- </ul> --}}
-                          
+                        @elseif (Auth::id() == 2)
+                          {{-- <ul class="nav navbar-nav navbar-right"> --}}
+                              <li><a href="/room/">Rooms</a></li>
+                          {{-- </ul> --}}
+                          {{-- <ul class="nav navbar-nav navbar-right"> --}}
+                              <li><a href="/report/">Reports</a></li>
+                          {{-- </ul> --}}
+                          {{-- <ul class="nav navbar-nav navbar-right"> --}}
+                              <li><a href="/invoice/">Invoices</a></li>
+                          {{-- </ul> --}}
+                        @else
+                          {{-- <ul class="nav navbar-nav navbar-right"> --}}
+                              <li><a href="/customer/">Customers</a></li>
+                          {{-- </ul> --}}
+
+                          {{-- <ul class="nav navbar-nav navbar-right"> --}}
+                              <li><a href="/reservation/">Reservations</a></li>
+                          {{-- </ul> --}}
+                          {{-- <ul class="nav navbar-nav navbar-right"> --}}
+                              <li><a href="/invoice/">Invoices</a></li>
+                          {{-- </ul> --}}
+                        @endif
+                        
+
 
 
                             <li class="dropdown">

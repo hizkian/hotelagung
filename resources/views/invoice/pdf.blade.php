@@ -49,7 +49,7 @@
         <li>(0333) 845844</li>
         <li><hr></li>
         <li>Check In: {{$invoice->reservation->user->name}}</li>
-        <li>Check Out: {{$user}}</li>
+        <li>Check Out: {{$invoice->reservation->checkout_user->name}}</li>
       </ul>
     </div>
     <p style="font-weight:bold">Bill Number : 0{{$invoice->id}}</p>
