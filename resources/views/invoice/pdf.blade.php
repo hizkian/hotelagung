@@ -50,6 +50,7 @@
         <li><hr></li>
         <li>Check In: {{$invoice->reservation->user->name}}</li>
         <li>Check Out: {{$invoice->reservation->checkout_user->name}}</li>
+        <li>Date : {{$invoice->created_at->timezone('Asia/Jakarta')}}</li>
       </ul>
     </div>
     <p style="font-weight:bold">Bill Number : {{$invoice->id}}</p>
