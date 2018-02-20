@@ -48,11 +48,13 @@
         <li>Genteng, Kabupaten Banyuwangi, Jawa Timur 68465</li>
         <li>(0333) 845844</li>
         <li><hr></li>
-        <li>Check In: {{$invoice->reservation->user->name}}</li>
-        <li>Check Out: {{$user}}</li>
+        <li>Check In by: {{$invoice->reservation->user->name}}</li>
+        <li>Check Out by: {{$user}}</li>
+        <li>Date : {{$invoice->created_at->timezone('Asia/Jakarta')}}</li>
       </ul>
     </div>
-    <p style="font-weight:bold">Bill Number : 0{{$invoice->id}}</p>
+    <p style="font-weight:bold">Bill Number : {{$invoice->id}}</p>
+
     <hr>
     <ul style="list-style:none;margin-left:-40px">
       <li style="font-weight:bold">Customer Name:</li>
