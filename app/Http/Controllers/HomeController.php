@@ -378,4 +378,11 @@ class HomeController extends Controller
       $pdf = PDF::loadView('report.pdf', ['report' => $report, 'additionaltotal' => $additionaltotal, 'roomtotal' => $roomtotal, 'countroom' => $countroom]);
       return $pdf->stream('report-' . date('F', strtotime($report->created_at)) . '-' . $report->year . '.pdf');
     }
+
+    //==========FILTERED_REPORT==========//
+
+    public function printFilteredReport(Request $req){
+      $pdf = PDF::loadHTML('<h1>Tes</h1>');
+      return $pdf->stream('tes.pdf');
+    }
 }

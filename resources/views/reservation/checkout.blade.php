@@ -77,7 +77,7 @@
                   </div>
                   <div class="form-group">
                     <label for="quantity">Quantity</label>
-                    <input id="quantity" type="text" class="form-control">
+                    <input id="quantity" type="number" class="form-control">
                   </div>
                   <div class="form-group">
                     <button id="add" type="button" name="button" class="form-control btn btn-default pull-right">Add Additional</button>

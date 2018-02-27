@@ -46,11 +46,11 @@
                   </div>
                   <div class="form-group">
                     <label for="no_ktp">KTP Number</label>
-                    <input type="text" name="no_ktp" class="form-control" required>
+                    <input type="text" name="no_ktp" class="form-control" maxlength="20" required>
                   </div>
                   <div class="form-group">
                     <label for="no_hp">Phone Number</label>
-                    <input type="text" name="no_hp" class="form-control" required>
+                    <input type="number" name="no_hp" class="form-control" required>
                   </div>
 
                   <div class="form-group">

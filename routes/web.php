@@ -65,10 +65,16 @@ Route::group(['middleware' => 'disablepreventback'],function(){
       Route::prefix('report')->group(function () {
           Route::get('/', 'HomeController@indexReport');
           Route::get('/print/{id}/', 'HomeController@printReport');
+          Route::get('/filter','HomeController@printFilteredReport');
       });
+
   });
 });
 
 Route::get('/home', function(){
   return redirect('/reservation/');
+});
+
+Route::get('iseng', function(){
+  return view('report/filter');
 });
