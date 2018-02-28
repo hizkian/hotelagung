@@ -383,7 +383,8 @@ class HomeController extends Controller
 
     public function printFilteredReport(Request $req){
       $reservation = Reservation::select('id')->whereBetween('checkout', [$req->from, $req->until])->get();
-      $invoices = Invoice::whereIn('id', $reservation)->get();
+      $invoices = Invoice::whereIn('reservation_id', $reservation)->get();
+      // dd($invoices);
       $pdf = PDF::loadView('report.filter', ['invoices' => $invoices, 'from' => $req->from, 'until' => $req->until]);
       return $pdf->stream('invoice-from-' . $req->from . '-until-' . $req->until . '.pdf');
     }

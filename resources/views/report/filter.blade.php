@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Monthly Report</title>
+    <title>Filtered Invoice Report</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style media="screen">
       .kanan{
@@ -30,7 +30,7 @@
   <body>
     <div class="w3-display-container">
       <h1 class="w3-left">Hotel Agung</h1>
-      <h3 class="w3-text-grey w3-right">Invoice Report</h3>
+      <h3 class="w3-text-grey w3-right">Filtered Invoice</h3>
     </div>
 
     <div class="w3-container">
@@ -65,7 +65,7 @@
           <tr>
             <td>{{$count++}}</td>
             <td>{{$invoice->id}}</td>
-            <td class="tengah">{{$invoice->reservation->checkout}}</td>
+            <td class="tengah">0{{$invoice->reservation->checkout}}</td>
             <td class="kanan">Rp. {{number_format($invoice->total, 0, '', '.')}}</td>
             @php
               $total += $invoice->total;
