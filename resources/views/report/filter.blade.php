@@ -40,6 +40,10 @@
         <li>Genteng, Kabupaten Banyuwangi, Jawa Timur 68465</li>
         <li>(0333) 845844</li>
       </ul>
+      <ul style="list-style:none;margin-left:-54px">
+        <li>From : {{$from}}</li>
+        <li>From : {{$until}}</li>
+      </ul>
     </div>
     <hr>
 

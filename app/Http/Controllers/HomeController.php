@@ -382,7 +382,9 @@ class HomeController extends Controller
     //==========FILTERED_REPORT==========//
 
     public function printFilteredReport(Request $req){
-      $pdf = PDF::loadHTML('<h1>Tes</h1>');
-      return $pdf->stream('tes.pdf');
+      $reservation = Reservation::select('id')->whereBetween('checkout', [$req->from, $req->until])->get();
+      $invoices = Invoice::whereIn('id', $reservation)->get();
+      $pdf = PDF::loadView('report.filter', ['invoices' => $invoices, 'from' => $req->from, 'until' => $req->until]);
+      return $pdf->stream('invoice-from-' . $req->from . '-until-' . $req->until . '.pdf');
     }
 }
