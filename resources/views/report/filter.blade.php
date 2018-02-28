@@ -42,7 +42,7 @@
       </ul>
       <ul style="list-style:none;margin-left:-54px">
         <li>From : {{$from}}</li>
-        <li>From : {{$until}}</li>
+        <li>Until : {{$until}}</li>
       </ul>
     </div>
     <hr>
@@ -57,12 +57,21 @@
         </tr>
 
         {{-- Table Content --}}
-        <tr>
-          <td>1</td>
-          <td>01</td>
-          <td class="tengah">27-02-2018</td>
-          <td class="kanan">Rp. 500.000</td>
-        </tr>
+        @php
+          $count = 1;
+          $total = 0;
+        @endphp
+        @foreach ($invoices as $invoice)
+          <tr>
+            <td>{{$count++}}</td>
+            <td>{{$invoice->id}}</td>
+            <td class="tengah">{{$invoice->reservation->checkout}}</td>
+            <td class="kanan">Rp. {{number_format($invoice->total, 0, '', '.')}}</td>
+            @php
+              $total += $invoice->total;
+            @endphp
+          </tr>
+        @endforeach
         {{-- End of table content --}}
 
         {{-- Total --}}
@@ -70,7 +79,7 @@
           <td></td>
           <td></td>
           <td class="kanan"><strong>Total</strong></td>
-          <td class="kanan">Rp. 500.000</td>
+          <td class="kanan">Rp. {{number_format($total, 0, '', '.')}}</td>
         </tr>
         {{-- Total Invoice --}}
 
