@@ -51,24 +51,21 @@
         {{-- table head laporan --}}
         <tr class="w3-light-gray tengah">
           <th style="width:25px">No</th>
-          <th class="tengah">Invoice Number</th>
+          <th class="tengah">Inv. No.</th>
           <th class="tengah">Customer Name</th>
+          <th class="tengah">Check Out Date</th>
           <th class="kanan" style="width:200px">Subtotal</th>
         </tr>
 
         {{-- Table Content --}}
         {{$count = 2}}
-        <tr>
-          <td class="tengah">1</td>
-          <td>-</td>
-          <td>Last Month Income</td>
-          <td class="kanan"> {{number_format($lastmonth->total, 0, '', ',')}}</td>
-        </tr>
         @foreach ($report->invoices as $invoice)
           <tr>
             <td class="tengah">{{$count}}</td>
             <td>0{{$invoice->id}}</td>
             <td>{{$invoice->reservation->customer->name}}</td>
+            <td class="tengah">{{date('d-m-Y',
+              strtotime($invoice->created_at))}}</td>
             <td class="kanan"> {{number_format($invoice->total, 0, '', ',')}}</td>
           </tr>
           {{$count++}}
@@ -82,7 +79,8 @@
         <tr>
           <td style="border:0px"></td>
           <td style="border:0px"></td>
-          <th class="kanan">Total</th>
+          <td style="border:0px"></td>
+          <th class="kanan" style="border-left:0px">Total</th>
           <td class="kanan"> {{number_format($report->total, 0, '', ',')}}</td>
         </tr>
     </table>
@@ -184,12 +182,12 @@
       @endforeach
       {{-- End of Table Content --}}
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <th class="kanan">Total</th>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
+        <th class="kanan" style="border:0px">Total</th>
         <td class="kanan"> {{number_format($additionaltotal, 0 , '', ',')}}</td>
       </tr>
 
@@ -216,11 +214,12 @@
     <table>
       <tr class="w3-light-gray tengah">
         <th style="width:25px">No</th>
-        <th>Invoice Number</th>
-        <th>Customer Name</th>
+        <th>Inv. No.</th>
+        <th>Cust. Name</th>
         <th>Room</th>
         <th>Subtotal</th>
-        <th>Quantity</th>
+        <th>Q.</th>
+        <th class="tengah">Check Out Date</th>
         <th style="width:200px">Total</th>
       </tr>
       {{-- Table Content --}}
@@ -239,6 +238,8 @@
             <td>{{$room->name}}</td>
             <td class="kanan"> {{number_format($room->price, 0, '', ',')}}</td>
             <td class="tengah">{{$days}}</td>
+            <td class="tengah">{{date('d-m-Y',
+              strtotime($invoice->created_at))}}</td>
             <td class="kanan"> {{number_format($days * $room->price, 0, '', ',')}}</td>
           </tr>
           {{$count++}}
@@ -247,21 +248,23 @@
       @endforeach
       {{-- End of Table Content --}}
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
         <th class="kanan">Total</th>
         <td class="kanan"> {{number_format($roomtotal, 0, '', ',')}}</td>
       </tr>
 
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
+        <td style="border:0px"></td>
         <th class="kanan">Occupancy</th>
         <td class="kanan"> {{number_format((float) $quantity / (cal_days_in_month(CAL_GREGORIAN, $report->month, $report->year) * $countroom) * 100, 2, '.', '')}}%</td>
       </tr>

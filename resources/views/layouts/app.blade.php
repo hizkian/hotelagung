@@ -63,7 +63,16 @@
                               <li><a href="/additional/">Additionals</a></li>
                           {{-- </ul> --}}
                           {{-- <ul class="nav navbar-nav navbar-right"> --}}
-                              <li><a href="/report/">Reports</a></li>
+                              <li class="dropdown">
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                  Reports<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="/report/monthly">Monthly Reports</a></li>
+                                  <li><a href="/report/daily">Daily Reports</a></li>
+                                  <li><a href="/report/customer" target="_blank">Customer Reports</a></li>
+                                </ul>
+                              </li>
                           {{-- </ul> --}}
                           {{-- <ul class="nav navbar-nav navbar-right"> --}}
                               <li><a href="/customer/">Customers</a></li>
@@ -80,7 +89,12 @@
                               <li><a href="/room/">Rooms</a></li>
                           {{-- </ul> --}}
                           {{-- <ul class="nav navbar-nav navbar-right"> --}}
-                              <li><a href="/report/">Reports</a></li>
+                              <li class="dropdown"><a href="/report/">Reports<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="/report/monthly">Monthly Reports</a></li>
+                                  <li><a href="/report/daily">Daily Reports</a></li>
+                                </ul>
+                              </li>
                           {{-- </ul> --}}
                           {{-- <ul class="nav navbar-nav navbar-right"> --}}
                               <li><a href="/invoice/">Invoices</a></li>

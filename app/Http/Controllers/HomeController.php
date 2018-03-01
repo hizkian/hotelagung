@@ -236,7 +236,10 @@ class HomeController extends Controller
 
     public function indexCustomer()
     {
-      $customers = Customer::orderBy('created_at', 'desc')->get();
+      // $customers = Customer::orderBy('created_at', 'desc')->get();
+      // return view('customer.index', compact('customers'));
+      $reservations = Reservation::select('customer_id')->whereNull('checkout')->get();
+      $customers = Customer::whereIn('id', $reservations)->get();
       return view('customer.index', compact('customers'));
     }
 
@@ -274,7 +277,7 @@ class HomeController extends Controller
 
     public function dailyReport()
     {
-      $reservations = Reservation::where('checkout', date('Y-m-d'))->get();
+      $reservations = Reservation::whereNull('checkout')->get();
       $pdf = PDF::loadView('customer.dailyreportpdf', ['reservations' => $reservations]);
       return $pdf->stream('dailyreport-' . date('Y-m-d') . '.pdf');
     }
@@ -357,7 +360,11 @@ class HomeController extends Controller
       foreach ($reports as $report) {
         $total += $report->total;
       }
-      return view('report.index', compact('reports', 'total'));
+      return view('report.monthly', compact('reports', 'total'));
+    }
+
+    public function filteredReport(){
+      return view('report.daily');
     }
 
     public function printReport($id)
@@ -389,5 +396,12 @@ class HomeController extends Controller
       // dd($invoices);
       $pdf = PDF::loadView('report.filter', ['invoices' => $invoices, 'from' => $req->from, 'until' => $req->until]);
       return $pdf->stream('invoice-from-' . $req->from . '-until-' . $req->until . '.pdf');
+    }
+
+    //==========CUSTOMER_REPORT==========//
+    public function printAllCustomer(Request $req){
+      $customers = Customer::orderBy('created_at', 'desc')->get();
+      $pdf = PDF::loadView('report.customerall', ['customers' => $customers]);
+      return $pdf->stream('dailyreport-' . date('Y-m-d') . '.pdf');
     }
 }

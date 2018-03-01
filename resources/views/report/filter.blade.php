@@ -64,8 +64,8 @@
         @foreach ($invoices as $invoice)
           <tr>
             <td>{{$count++}}</td>
-            <td>{{$invoice->id}}</td>
-            <td class="tengah">0{{$invoice->reservation->checkout}}</td>
+            <td>0{{$invoice->id}}</td>
+            <td class="tengah">{{date('d-m-Y',strtotime($invoice->reservation->checkout))}}</td>
             <td class="kanan">Rp. {{number_format($invoice->total, 0, '', '.')}}</td>
             @php
               $total += $invoice->total;

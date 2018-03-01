@@ -37,7 +37,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
           <div class="">
-            <a href="/customer/dailyreport/" class="btn btn-primary form-control">Download Daily Report</a>
+            <a href="/customer/dailyreport/" class="btn btn-primary form-control" target="_blank">Download Daily Report</a>
           </div>
           <br>
             @if (count($customers) == 0)

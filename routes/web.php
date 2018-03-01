@@ -63,9 +63,11 @@ Route::group(['middleware' => 'disablepreventback'],function(){
       });
 
       Route::prefix('report')->group(function () {
-          Route::get('/', 'HomeController@indexReport');
+          Route::get('/monthly', 'HomeController@indexReport');
           Route::get('/print/{id}/', 'HomeController@printReport');
+          Route::get('/daily','HomeController@filteredReport');
           Route::get('/filter','HomeController@printFilteredReport');
+          Route::get('/customer','HomeController@printAllCustomer');
       });
 
   });
