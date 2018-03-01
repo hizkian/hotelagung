@@ -57,7 +57,13 @@
         </tr>
 
         {{-- Table Content --}}
-        {{$count = 1}}
+        {{$count = 2}}
+        <tr>
+          <td class="tengah">1</td>
+          <td>-</td>
+          <td>Last Month Income</td>
+          <td class="kanan"> {{number_format($lastmonth->total, 0, '', ',')}}</td>
+        </tr>
         @foreach ($report->invoices as $invoice)
           <tr>
             <td class="tengah">{{$count}}</td>

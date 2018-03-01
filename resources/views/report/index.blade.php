@@ -36,6 +36,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+          <div class="">
+            <h2>Total income : Rp. {{number_format($total, 0, '', '.')}},-</h2>
+          </div>
             @if (count($reports) == 0)
               <div class="alert alert-danger">
                 <span class="fa-stack fa-lg close-button">

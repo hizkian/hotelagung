@@ -161,14 +161,7 @@ class HomeController extends Controller
         $report = new Report;
         $report->month = date('m');
         $report->year = date('Y');
-        if ((int)date('m') == 1) {
-          $lastdate = Report::where('month', 12)->where('year', (int)date('Y') - 1)->first();
-        } else {
-          $lastdate = Report::where('month', (int)date('m') - 1)->where('year', (int)date('Y'))->first();
-        }
-        if ($lastdate != null) {
-          $report->total = $lastdate->total;
-        }
+        $report->total = 0;
 
         $report->save();
       }
@@ -360,7 +353,11 @@ class HomeController extends Controller
     public function indexReport()
     {
       $reports = Report::orderBy('created_at', 'DESC')->get();
-      return view('report.index', compact('reports'));
+      $total = 0;
+      foreach ($reports as $report) {
+        $total += $report->total;
+      }
+      return view('report.index', compact('reports', 'total'));
     }
 
     public function printReport($id)
@@ -368,6 +365,11 @@ class HomeController extends Controller
       $report = Report::find($id);
       $roomtotal = 0;
       $additionaltotal = 0;
+      if ((int)date('m') == 1) {
+        $lastmonth = Report::where('month', 12)->where('year', (int)date('Y') - 1)->first();
+      } else {
+        $lastmonth = Report::where('month', (int)date('m') - 1)->where('year', (int)date('Y'))->first();
+      }
       foreach ($report->invoices as $invoice) {
         $roomtotal += $invoice->reservation->total;
         foreach ($invoice->additionals as $additional) {
@@ -375,7 +377,7 @@ class HomeController extends Controller
         }
       }
       $countroom = Room::count();
-      $pdf = PDF::loadView('report.pdf', ['report' => $report, 'additionaltotal' => $additionaltotal, 'roomtotal' => $roomtotal, 'countroom' => $countroom]);
+      $pdf = PDF::loadView('report.pdf', ['report' => $report, 'additionaltotal' => $additionaltotal, 'roomtotal' => $roomtotal, 'countroom' => $countroom, 'lastmonth' => $lastmonth]);
       return $pdf->stream('report-' . date('F', strtotime($report->created_at)) . '-' . $report->year . '.pdf');
     }
 
